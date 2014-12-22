@@ -3,3 +3,10 @@ C:\projects\Private\HIT\Garage\A15 Ex03 Boris 311898746 Rami 302848197\Ex03.Gara
 C:\projects\Private\HIT\Garage\A15 Ex03 Boris 311898746 Rami 302848197\Ex03.GarageManagmentSystem.ConsoleUI\obj\Debug\Ex03.GarageManagmentSystem.ConsoleUI.csprojResolveAssemblyReference.cache
 C:\projects\Private\HIT\Garage\A15 Ex03 Boris 311898746 Rami 302848197\Ex03.GarageManagmentSystem.ConsoleUI\obj\Debug\Ex03.GarageManagmentSystem.ConsoleUI.exe
 C:\projects\Private\HIT\Garage\A15 Ex03 Boris 311898746 Rami 302848197\Ex03.GarageManagmentSystem.ConsoleUI\obj\Debug\Ex03.GarageManagmentSystem.ConsoleUI.pdb
+C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageManagmentSystem.ConsoleUI\bin\Debug\Ex03.GarageManagmentSystem.ConsoleUI.exe
+C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageManagmentSystem.ConsoleUI\bin\Debug\Ex03.GarageManagmentSystem.ConsoleUI.pdb
+C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageManagmentSystem.ConsoleUI\obj\Debug\Ex03.GarageManagmentSystem.ConsoleUI.csprojResolveAssemblyReference.cache
+C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageManagmentSystem.ConsoleUI\obj\Debug\Ex03.GarageManagmentSystem.ConsoleUI.exe
+C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageManagmentSystem.ConsoleUI\obj\Debug\Ex03.GarageManagmentSystem.ConsoleUI.pdb
+C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageManagmentSystem.ConsoleUI\bin\Debug\Ex03.GarageLogic.dll
+C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageManagmentSystem.ConsoleUI\bin\Debug\Ex03.GarageLogic.pdb

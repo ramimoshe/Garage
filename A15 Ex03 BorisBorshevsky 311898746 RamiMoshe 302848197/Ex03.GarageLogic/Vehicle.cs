@@ -1,37 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 
 namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        public string Model { get; set; }
+        public Vehicle()
+        {
+                
+        }
+        public Vehicle(string i_Model, string i_SerialNumber, List<Wheel> i_Wheels)
+        {
+            
+        }
 
-        public string SerialNumber { get; set; }
+        public string Model { get; private set; }
 
-        public float PrecentEnergyLeft { get; set; }
+        public string SerialNumber { get; private set; }
 
-        
+        public float PrecentEnergyLeft {
+            get { 
+                return 1;
+            }
+        }
+
+        protected List<Wheel> Wheels;
+
     }
 
-    class Wheel
+    public class Wheel
     {
         public string Manufactor { get; set; }
 
         public float AirPresure { get; set; }
 
-        public float ManufactorAirPresure { get; set; }
+        public float MaxManufactorAirPresure { get; set; }
 
         public void AddAdir(float amount)
         {
             //validate param and add the air
+            throw new ValueOutOfRangeException("asd", 1,1);
         }
-
-
     }
 
-    enum eMotorcycleLincesType
+
+    public class ValueOutOfRangeException : Exception
+    {
+        public float MaxValue { get; private set; }
+        public float MinValue { get; private set; }
+
+        public ValueOutOfRangeException(string i_Message, float i_MinValue, float i_MaxValue) : base(i_Message)
+        {
+            MaxValue = i_MaxValue;
+            MinValue = i_MinValue;
+        }
+    }
+
+
+
+    public enum eMotorcycleLincesType
     {
         A,
         A1,
@@ -39,42 +68,74 @@ namespace Ex03.GarageLogic
         B2
     }
 
-    class Morotcycle
+    public abstract class Motorcycle : Vehicle
     {
         public eMotorcycleLincesType MotorcycleLincesType { get; set; }
 
         public int EngineCc { get; set; }
     }
 
-    enum eColor
+    public class FuelMorotcycle : Motorcycle
+    {
+        public FuelEngine Engine { get; set; }    
+    }
+
+    public class ElectricMorotcycle : Motorcycle
+    {
+        public ElectricEngine Engine { get; set; }
+    }
+
+    public enum eCarColor
     {
         White,
-        //.....
+        Green,
+        Blue,
+        Red
     }
 
-    class Car
+    public enum eNumOfDoors
     {
-        public eColor Color { get; set; }
-
-        public int Doors { get; set; }
+        Two = 2,
+        Three = 3,
+        Four = 4,
+        Five = 5
     }
 
-    class Truck : Car
+    public abstract class Car : Vehicle
+    {
+        public eCarColor Color { get; set; }
+
+        public eNumOfDoors NumOfDoors { get; set; }
+    }
+
+    public class ElectricCar : Car
+    {
+        public ElectricEngine Engine { get; set; }
+    }
+
+    public class FuelCar : Car
+    {
+        public FuelEngine Engine { get; set; }
+    }
+
+    public class Truck : Vehicle
     {
         public bool IsContainsDangerusMatirial { get; set; }
 
-        public float MaxWeight { get; set; }
+        public float MaxCargoWeightAllowed { get; set; }
 
-        public float CurrentWeight { get; set; }
+        public float CurrentCargoWeight { get; set; }
     }
 
-    enum eFuelType
+    public enum eFuelType
     {
         Soler,
-        //....
+        Octan95,
+        Octan96,
+        Octan98
     }
 
-    class FuelEngine
+    public class FuelEngine
     {
         public eFuelType FuelType { get; set; }
 
@@ -82,13 +143,14 @@ namespace Ex03.GarageLogic
 
         public float MaxFuelAmount { get; set; }
 
-        public void Fuel(float i_amount)
+        public void Fuel(float i_AmountFuelToAdd, eFuelType i_FuelTypeToAdd)
         {
-            
+            throw new ArgumentException();
+            throw new ValueOutOfRangeException("aa",2,3);
         }
     }
 
-    class ElectricEngine
+    public class ElectricEngine
     {
         public float WorkHoursRemining { get; set; }
 
@@ -100,13 +162,13 @@ namespace Ex03.GarageLogic
         }
     }
 
-    enum eVehicleState
+    public enum eVehicleState
     {
         Fixed,
         //....
     }
 
-    class Ticket
+    public class Ticket
     {
         public string CarOwnerName { get; set; }
 
@@ -115,7 +177,7 @@ namespace Ex03.GarageLogic
         public eVehicleState CarState { get; set; }
     }
 
-    class Garage
+    public class Garage
     {
         private readonly List<Ticket> tickets;
 
@@ -160,7 +222,7 @@ namespace Ex03.GarageLogic
         }
     }
 
-    class CarReport
+    public class CarReport
     {
          
     }
