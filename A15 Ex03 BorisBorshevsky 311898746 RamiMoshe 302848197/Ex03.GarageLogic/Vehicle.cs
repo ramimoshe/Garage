@@ -32,13 +32,13 @@ namespace Ex03.GarageLogic
 
     public class Wheel
     {
-        public string Manufactor { get; set; }
+        public string Manufacturer { get; set; }
 
         public float AirPresure { get; set; }
 
-        public float MaxManufactorAirPresure { get; set; }
+        public float MaxManufacturerAirpressure { get; set; }
 
-        public void AddAdir(float amount)
+        public void AddAdir(float i_Amount)
         {
             //validate param and add the air
             throw new ValueOutOfRangeException("asd", 1,1);
@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
 
 
 
-    public enum eMotorcycleLincesType
+    public enum eMotorcycleLicenseType
     {
         A,
         A1,
@@ -70,7 +70,7 @@ namespace Ex03.GarageLogic
 
     public abstract class Motorcycle : Vehicle
     {
-        public eMotorcycleLincesType MotorcycleLincesType { get; set; }
+        public eMotorcycleLicenseType LicenseType { get; set; }
 
         public int EngineCc { get; set; }
     }
@@ -120,6 +120,8 @@ namespace Ex03.GarageLogic
 
     public class Truck : Vehicle
     {
+        public FuelEngine Engine { get; set; }
+        
         public bool IsContainsDangerusMatirial { get; set; }
 
         public float MaxCargoWeightAllowed { get; set; }
@@ -201,7 +203,7 @@ namespace Ex03.GarageLogic
             
         }
 
-        public void FillManufacturAirPresure(string i_serialNumber)
+        public void FillManufacturerAirpressure(string i_serialNumber)
         {
             
         }
