@@ -8,3 +8,8 @@ C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 3028
 C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csprojResolveAssemblyReference.cache
 C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.dll
 C:\projects\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.pdb
+C:\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.csprojResolveAssemblyReference.cache
+C:\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.dll
+C:\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageLogic\obj\Debug\Ex03.GarageLogic.pdb
+C:\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageLogic\bin\Debug\Ex03.GarageLogic.dll
+C:\Private\HIT\Garage\A15 Ex03 BorisBorshevsky 311898746 RamiMoshe 302848197\Ex03.GarageLogic\bin\Debug\Ex03.GarageLogic.pdb
