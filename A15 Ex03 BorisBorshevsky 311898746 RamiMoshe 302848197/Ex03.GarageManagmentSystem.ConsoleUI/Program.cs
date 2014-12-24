@@ -4,8 +4,7 @@
     {
         static void Main(string[] args)
         {
-            GarageUi ui = new GarageUi();
-            ui.Start();
+            new GarageConsoleUi().Start();
         }
     }
 }

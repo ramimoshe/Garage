@@ -5,7 +5,8 @@ namespace Ex03.GarageLogic.VehicleElements
 {
     public class Wheel
     {
-        public readonly float r_MaxManufacturerAirPressure;
+        private readonly float r_MaxManufacturerAirPressure;
+        private const float k_MinimalAmountOfAir = 0f;
 
         public Wheel(float i_MaxManufacturerAirPressure)
         {
@@ -18,14 +19,14 @@ namespace Ex03.GarageLogic.VehicleElements
 
         public void AddAdir(float i_Amount)
         {
-            if (i_Amount < 0)
+            if (i_Amount < k_MinimalAmountOfAir)
             {
-                throw new ArgumentException("Cant add negative amount of air pressure");
+                throw new ArgumentException("Cant add less than " + k_MinimalAmountOfAir.ToString() + " air");
             }
 
             if (i_Amount + CurrentAirPressure > r_MaxManufacturerAirPressure)
             {
-                throw new ValueOutOfRangeException("Cant fill air more then the maximum pressure", 0, r_MaxManufacturerAirPressure);
+                throw new ValueOutOfRangeException("Cant fill air more then the maximum pressure", k_MinimalAmountOfAir, r_MaxManufacturerAirPressure);
             }
 
             CurrentAirPressure += i_Amount;

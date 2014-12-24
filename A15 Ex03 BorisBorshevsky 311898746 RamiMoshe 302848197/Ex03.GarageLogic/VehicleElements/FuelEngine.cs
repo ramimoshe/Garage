@@ -5,30 +5,50 @@ namespace Ex03.GarageLogic.VehicleElements
 {
     public class FuelEngine
     {
-        public float r_MaxFuelAmount;
+        private const float k_minimumAmountToFuel = 0f;
+        private readonly float r_MaxFuelAmount;
+        private readonly eFuelType r_FuelType;
+        private float m_CurrentFuelAmount;
 
-        public void Fuel(float i_Amount, eFuelType i_FuelType)
+        public FuelEngine(eFuelType i_FuelType, float i_CurrentFuelAmount, float i_MaxFuelAmount)
         {
-            if (i_Amount < 0)
+            if (i_CurrentFuelAmount > i_MaxFuelAmount)
             {
-                throw new ArgumentException("Cant add negative amount of fuel");
+                throw new ValueOutOfRangeException("Cant fill more then maximum amount of fuel", k_minimumAmountToFuel, i_MaxFuelAmount);
             }
+            
+            r_FuelType = i_FuelType;
+            r_MaxFuelAmount = i_MaxFuelAmount;
+            m_CurrentFuelAmount = i_CurrentFuelAmount;
+        }
 
-            if (i_Amount + CurrentFuelAmount > r_MaxFuelAmount)
+        public void Fuel(float i_AmountToAdd, eFuelType i_FuelType)
+        {
+            if (i_AmountToAdd < k_minimumAmountToFuel)
             {
-                throw new ValueOutOfRangeException("Cant fill air more then the maximum fuel", 0, r_MaxFuelAmount);
+                throw new ArgumentException("Cant add amount below " + k_minimumAmountToFuel.ToString());
             }
-
-            if (FuelType != i_FuelType)
+            else if (i_AmountToAdd + CurrentFuelAmount > r_MaxFuelAmount)
+            {
+                throw new ValueOutOfRangeException("Cant fill more then the maximum fuel", k_minimumAmountToFuel, r_MaxFuelAmount);
+            }
+            else if (FuelType != i_FuelType)
             {
                 throw new ArgumentException("Not suitable fuel type");
             }
-
-            CurrentFuelAmount += i_Amount;
+            else 
+            { 
+                CurrentFuelAmount += i_AmountToAdd;
+            }
         }
 
-        public eFuelType FuelType { get; set; }
+        private eFuelType FuelType { 
+            get { return r_FuelType; } 
+        }
 
-        public float CurrentFuelAmount { get; set; }
+        public float CurrentFuelAmount {
+            get { return m_CurrentFuelAmount; }
+            private set { m_CurrentFuelAmount = value; }
+        }
     }
 }
