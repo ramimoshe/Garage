@@ -204,7 +204,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                     maxCargoWeight = getMaxCargoCargoWeightFromUser();
                     currentCargoWeight = getCurrentCargoCargoWeightFromUser();
                     currentFuelAmmount = getCurrentFuelAmountFromUser();
-                    vehicle = VehicleFactory.GenerateTruck(vehicleModel, i_LicencePlate, maxCargoWeight, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount); // current cargo weight
+                    vehicle = VehicleFactory.GenerateTruck(vehicleModel, i_LicencePlate, maxCargoWeight, currentCargoWeight, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount); // current cargo weight
                     break;
 
                 default:
@@ -402,7 +402,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private void showAllVechaleLicensePlates()
         {
             int counter = 0;
-            foreach (string licensePlate in Garage.GetGarageTickets())
+            foreach (string licensePlate in Garage.GetSerialNumbersInGarage())
             {
                 counter++;
                 Console.WriteLine("({0}) {1}.",counter , licensePlate);
@@ -572,8 +572,8 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             string licensePlate = getLicensePlateFromUser();
             try 
             {
-                CarReport carReport = Garage.GetCarReport(licensePlate);
-                Console.WriteLine(carReport.ToString());
+                string carReport = Garage.GetCarReport(licensePlate);
+                Console.WriteLine(carReport);
             }
             catch (ArgumentException ae)
             {
@@ -585,7 +585,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private void showFilteredListOfLicensePlates(eVehicleState i_FilteredBy)
         {
             int counter = 0;
-            foreach (string licensePlate in Garage.GetGarageTickets(i_FilteredBy))
+            foreach (string licensePlate in Garage.GetSerialNumbersInGarage(i_FilteredBy))
             {
                 counter++;
                 Console.WriteLine("({0}) {1}.", counter, licensePlate);

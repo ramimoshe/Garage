@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex03.GarageLogic.VehicleElements
+﻿namespace Ex03.GarageLogic.VehicleElements
 {
     public class ElectricEnergy : Engery
     {
-        public float Amount { get; set; }
+        public ElectricEnergy(float i_Amount)
+            :base(i_Amount)
+        { }
     }
 }

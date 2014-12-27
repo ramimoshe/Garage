@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ex03.GarageLogic.VehicleElements;
 using Ex03.GarageLogic.Vehicles;
 
 namespace Ex03.GarageLogic
@@ -33,17 +34,17 @@ namespace Ex03.GarageLogic
             return Tickets.ContainsKey(i_SerialNumber);
         }
 
-        public List<string> GetGarageTickets()
+        public List<string> GetSerialNumbersInGarage()
         {
-            return GetGarageTickets(eVehicleState.Amendment | eVehicleState.Fixed | eVehicleState.Payed);
+            return GetSerialNumbersInGarage(eVehicleState.Amendment | eVehicleState.Fixed | eVehicleState.Payed);
         }
 
-        public List<string> GetGarageTickets(eVehicleState i_eVehicleState)
+        public List<string> GetSerialNumbersInGarage(eVehicleState i_VehicleState)
         {
             List<string> serialNumbers = new List<string>();
             foreach (var ticket in Tickets)
             {
-                if (ticket.Value.CarState == i_eVehicleState)
+                if (ticket.Value.CarState == i_VehicleState)
                 {
                     serialNumbers.Add(ticket.Key);
                 }
@@ -52,9 +53,9 @@ namespace Ex03.GarageLogic
             return serialNumbers;
         }
 
-        public void UpdateVehicleState(string i_serialNumber, eVehicleState i_vehicleState)
+        public void UpdateVehicleState(string i_SerialNumber, eVehicleState i_VehicleState)
         {
-            Tickets[i_serialNumber].CarState = i_vehicleState;
+            Tickets[i_SerialNumber].CarState = i_VehicleState;
         }
 
         public void FillManufacturerAirpressure(string i_serialNumber)
@@ -62,19 +63,29 @@ namespace Ex03.GarageLogic
             Tickets[i_serialNumber].Vehicle.FillManufacturerAirPressure();
         }
 
-        public void FuelVehicle(string i_serialNumber, eFuelType i_fuelType, float i_amountCc)
+        public void FuelVehicle(string i_SerialNumber, eFuelType i_FuelType, float i_AmountCc)
         {
-            //Tickets[i_serialNumber].Vehicle.
+            FuelEnergy fuelEnergy = new FuelEnergy(i_FuelType, i_AmountCc);
+            Tickets[i_SerialNumber].Vehicle.Engine.FillEnergy(fuelEnergy);
         }
 
-        public void ChargeVehicle(string i_serialNumber, float i_amountMinutes)
+        public void ChargeVehicle(string i_SerialNumber, float i_AmountMinutes)
         {
-            throw new ArgumentException("Licence card not found");
+            ElectricEnergy electricEnergy = new ElectricEnergy(i_AmountMinutes);
+            Tickets[i_SerialNumber].Vehicle.Engine.FillEnergy(electricEnergy);
         }
 
-        public CarReport GetCarReport(string i_serialNumber)
+        public string GetCarReport(string i_serialNumber)
         {
-            throw new ArgumentException("Licence card not found");
+            string report = String.Empty;
+            if (IsVehicleExists(i_serialNumber))
+            {
+                report = Tickets[i_serialNumber].ToString();
+            }
+
+            return report;
         }
+
+        
     }
 }

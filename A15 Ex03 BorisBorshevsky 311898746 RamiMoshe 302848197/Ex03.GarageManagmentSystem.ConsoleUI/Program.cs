@@ -9,8 +9,6 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         static void Main(string[] args)
         {
             new GarageConsoleUi().Start();
-        }
+        }     
     }
-
-
 }

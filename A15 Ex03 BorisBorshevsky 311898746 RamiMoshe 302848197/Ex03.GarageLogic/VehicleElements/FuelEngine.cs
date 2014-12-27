@@ -8,7 +8,6 @@ namespace Ex03.GarageLogic.VehicleElements
         private const float k_minimumAmountToFuel = 0f;
         private readonly eFuelType r_FuelType;
         private readonly float r_MaxFuelAmount;
-        private float m_CurrentFuelAmount;
 
         public FuelEngine(eFuelType i_FuelType, float i_CurrentFuelAmount, float i_MaxFuelAmount)
         {
@@ -19,41 +18,28 @@ namespace Ex03.GarageLogic.VehicleElements
             
             r_FuelType = i_FuelType;
             r_MaxFuelAmount = i_MaxFuelAmount;
-            m_CurrentFuelAmount = i_CurrentFuelAmount;
+            CurrentFuelAmount = i_CurrentFuelAmount;
         }
 
-        public void Fuel(float i_AmountToAdd, eFuelType i_FuelType)
+        private void Fuel(float i_AmountToAdd, eFuelType i_FuelType)
         {
             if (i_AmountToAdd < k_minimumAmountToFuel)
             {
                 throw new ArgumentException("Cant add amount below " + k_minimumAmountToFuel.ToString());
             }
-            else if (i_AmountToAdd + CurrentFuelAmount > r_MaxFuelAmount)
+
+            if (i_AmountToAdd + CurrentFuelAmount > r_MaxFuelAmount)
             {
                 throw new ValueOutOfRangeException("Cant fill more then the maximum fuel", k_minimumAmountToFuel, r_MaxFuelAmount);
             }
-            else if (FuelType != i_FuelType)
+
+            if (FuelType != i_FuelType)
             {
                 throw new ArgumentException("Not suitable fuel type");
             }
-            else 
-            { 
-                CurrentFuelAmount += i_AmountToAdd;
-            }
-        }
 
-        private eFuelType FuelType { 
-            get { return r_FuelType; } 
-        }
+            CurrentFuelAmount += i_AmountToAdd;
 
-        public float CurrentFuelAmount {
-            get { return m_CurrentFuelAmount; }
-            private set { m_CurrentFuelAmount = value; }
-        }
-
-        public float MaxFuelAmount
-        {
-            get { return r_MaxFuelAmount; }
         }
 
         public override void FillEnergy(Engery i_Energy)
@@ -63,6 +49,18 @@ namespace Ex03.GarageLogic.VehicleElements
                 FuelEnergy energy = (FuelEnergy) i_Energy;
                 Fuel(energy.Amount, energy.FuelType);
             }
+        }
+
+        public float CurrentFuelAmount { get; private set; }
+
+        public eFuelType FuelType
+        {
+            get { return r_FuelType; }
+        }
+
+        public float MaxFuelAmount
+        {
+            get { return r_MaxFuelAmount; }
         }
     }
 }
