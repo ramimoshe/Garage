@@ -25,8 +25,8 @@ namespace Ex03.GarageLogic
         {
             StringBuilder report = new StringBuilder();
 
-            report.Append("Serial Number: ");
-            report.AppendLine(Vehicle.SerialNumber);
+            report.Append("Licence Plate: ");
+            report.AppendLine(Vehicle.LicencePlate);
 
             report.Append("Model Name: ");
             report.AppendLine(Vehicle.ModelName);

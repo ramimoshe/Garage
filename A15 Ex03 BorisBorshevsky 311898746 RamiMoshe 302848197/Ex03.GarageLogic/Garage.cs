@@ -18,24 +18,24 @@ namespace Ex03.GarageLogic
 
         public void CreateTicket(string i_CarOwnerName, string i_CarOwnerPhone, Vehicle i_Vehicle)
         {
-            if (!IsVehicleExists(i_Vehicle.SerialNumber))
+            if (!IsVehicleExists(i_Vehicle.LicencePlate))
             {
                 Ticket ticket = new Ticket(i_CarOwnerName, i_CarOwnerPhone, i_Vehicle);
-                Tickets.Add(i_Vehicle.SerialNumber, ticket);
+                Tickets.Add(i_Vehicle.LicencePlate, ticket);
             }
         }
 
-        public bool IsVehicleExists(string i_SerialNumber)
+        public bool IsVehicleExists(string i_LicencePlate)
         {
-            return Tickets.ContainsKey(i_SerialNumber);
+            return Tickets.ContainsKey(i_LicencePlate);
         }
 
-        public List<string> GetSerialNumbersInGarage()
+        public List<string> GetLicencePlatesInGarage()
         {
-            return GetSerialNumbersInGarage(eVehicleState.Amendment | eVehicleState.Fixed | eVehicleState.Payed);
+            return GetLicencePlatesInGarage(eVehicleState.Amendment | eVehicleState.Fixed | eVehicleState.Payed);
         }
 
-        public List<string> GetSerialNumbersInGarage(eVehicleState i_VehicleState)
+        public List<string> GetLicencePlatesInGarage(eVehicleState i_VehicleState)
         {
             List<string> serialNumbers = new List<string>();
             foreach (var ticket in Tickets)
@@ -49,34 +49,34 @@ namespace Ex03.GarageLogic
             return serialNumbers;
         }
 
-        public void UpdateVehicleState(string i_SerialNumber, eVehicleState i_VehicleState)
+        public void UpdateVehicleState(string i_LicencePlate, eVehicleState i_VehicleState)
         {
-            Tickets[i_SerialNumber].CarState = i_VehicleState;
+            Tickets[i_LicencePlate].CarState = i_VehicleState;
         }
 
-        public void FillManufacturerAirpressure(string i_SerialNumber)
+        public void FillManufacturerAirpressure(string i_LicencePlate)
         {
-            Tickets[i_SerialNumber].Vehicle.FillManufacturerAirPressure();
+            Tickets[i_LicencePlate].Vehicle.FillManufacturerAirPressure();
         }
 
-        public void FuelVehicle(string i_SerialNumber, eFuelType i_FuelType, float i_AmountCc)
+        public void FuelVehicle(string i_LicencePlate, eFuelType i_FuelType, float i_AmountCc)
         {
             FuelEnergy fuelEnergy = new FuelEnergy(i_FuelType, i_AmountCc);
-            Tickets[i_SerialNumber].Vehicle.Engine.FillEnergy(fuelEnergy);
+            Tickets[i_LicencePlate].Vehicle.Engine.FillEnergy(fuelEnergy);
         }
 
-        public void ChargeVehicle(string i_SerialNumber, float i_AmountMinutes)
+        public void ChargeVehicle(string i_LicencePlate, float i_AmountMinutes)
         {
             ElectricEnergy electricEnergy = new ElectricEnergy(i_AmountMinutes);
-            Tickets[i_SerialNumber].Vehicle.Engine.FillEnergy(electricEnergy);
+            Tickets[i_LicencePlate].Vehicle.Engine.FillEnergy(electricEnergy);
         }
 
-        public string GetCarReport(string i_SerialNumber)
+        public string GetCarReport(string i_LicencePlate)
         {
             string report = String.Empty;
-            if (IsVehicleExists(i_SerialNumber))
+            if (IsVehicleExists(i_LicencePlate))
             {
-                report = Tickets[i_SerialNumber].ToString();
+                report = Tickets[i_LicencePlate].ToString();
             }
 
             return report;

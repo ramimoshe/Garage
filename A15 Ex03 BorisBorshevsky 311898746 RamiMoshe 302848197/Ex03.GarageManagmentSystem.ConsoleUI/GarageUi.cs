@@ -37,7 +37,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                         insertVehicleToGarage();
                         break;
                     case 2:
-                        vehicleSerialNumbersMenu();
+                        vehicleLicencePlatesMenu();
                         break;
                     case 3:
                         updateVehicleState();
@@ -272,18 +272,18 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 
 
 
-        private void vehicleSerialNumbersMenu()
+        private void vehicleLicencePlatesMenu()
         {
-            printVehicleSerialNumbersMenu();
+            printVehicleLicencePlatesMenu();
 
             int option = getMenuOptionFromUser(k_numOfOptionsInShowSerialsNumbersMenu);
             switch (option)
             {
                 case 1:
-                    showAllVechaleSerialNumbers();
+                    showAllVechaleLicencePlates();
                     break;
                 case 2:
-                    filteredVehicleSerialNumbersMenu();
+                    filteredVehicleLicencePlatesMenu();
                     break;
                 case 3:
                     break;
@@ -292,7 +292,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return;
         }
 
-        private static void printVehicleSerialNumbersMenu()
+        private static void printVehicleLicencePlatesMenu()
         {
             Console.Clear();
             StringBuilder stringBuilder = new StringBuilder();
@@ -304,7 +304,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             Console.WriteLine(stringBuilder);
         }
 
-        private void showAllVechaleSerialNumbers()
+        private void showAllVechaleLicencePlates()
         {
             /*Garage.GetGarageTickets().Keys;
             foreach (KeyValuePair<string, string> entry in MyDic)
@@ -314,25 +314,25 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         }
 
 
-        private void filteredVehicleSerialNumbersMenu()
+        private void filteredVehicleLicencePlatesMenu()
         {
-            printFilteredVehicleSerialNumbersMenu();
+            printFilteredVehicleLicencePlatesMenu();
             int optionFromUser = getMenuOptionFromUser(k_numOfVehicleStates);
             switch (optionFromUser)
             {
                 case 1:
-                    showFilteredListOfSerialNumbers(eVehicleState.Amendment);
+                    showFilteredListOfLicencePlates(eVehicleState.Amendment);
                     break;
                 case 2:
-                    showFilteredListOfSerialNumbers(eVehicleState.Fixed);
+                    showFilteredListOfLicencePlates(eVehicleState.Fixed);
                     break;
                 case 3:
-                    showFilteredListOfSerialNumbers(eVehicleState.Payed);
+                    showFilteredListOfLicencePlates(eVehicleState.Payed);
                     break;
             }
         }
 
-        private void printFilteredVehicleSerialNumbersMenu()
+        private void printFilteredVehicleLicencePlatesMenu()
         {
             Console.Clear();
             StringBuilder stringBuilder = new StringBuilder();
@@ -498,7 +498,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             } 
         }
 
-        private void showFilteredListOfSerialNumbers(eVehicleState i_FilteredBy)
+        private void showFilteredListOfLicencePlates(eVehicleState i_FilteredBy)
         {
 
         }
