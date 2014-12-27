@@ -52,12 +52,13 @@ namespace Ex03.GarageLogic
             return new Motorcycle(i_ModelName, i_LicencePlate, tires, i_LicenseType, i_EngineCc, engine);
         }
 
-        public static Truck GenerateTruck(string i_ModelName, string i_LicencePlate, float i_MaxCargoWeightAllowed, float i_CurrentCargoWeight, string i_ManufacturerTireName, float i_CurrentTireAirPressure, float i_CurrentFuelAmount)
+        public static Truck GenerateTruck(string i_ModelName, string i_LicencePlate, float i_MaxCargoWeightAllowed, float i_CurrentCargoWeight, string i_ManufacturerTireName, float i_CurrentTireAirPressure, float i_CurrentFuelAmount, bool i_IsCarryngDangerousMaterials)
         {
             List<Tire> tires = createTires(k_TiresAmountTruck, k_MaxManufacturerAirPressureTruck, i_ManufacturerTireName, i_CurrentTireAirPressure);
             FuelEngine engine = new FuelEngine(eFuelType.Octan95, i_CurrentFuelAmount, k_MaxFuelTruck);
             Truck truck = new Truck(i_ModelName, i_LicencePlate, tires, i_MaxCargoWeightAllowed, engine);
             truck.CurrentCargoWeight = i_CurrentCargoWeight;
+            truck.IsContainsDangerusMatirial = i_IsCarryngDangerousMaterials;
 
             return truck;
         }

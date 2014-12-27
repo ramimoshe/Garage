@@ -9,13 +9,6 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 {
     class GarageConsoleUi
     {
-        private const int k_numOfOptionsInMainMenu = 8;
-        private const int k_numOfVehicleStates = 3;
-        private const int k_numOfFuelTypes = 4;
-        private const int k_numOfVehicleTypes = 5;
-        private const int k_numOfMotorcycleLicenseTypes = 4;
-        private const int k_numOfColors = 4;
-        private const bool v_isPossitiveNumberOnly = true;
         private Garage Garage { get; set; }
 
         /*
@@ -41,11 +34,13 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         
         public void Start()
         {
+            const int numOfOptions = 8;
+            
             bool shouldExit = false;
             while (!shouldExit)
             {
                 printMainMenu();
-                int option = getMenuOptionFromUser(k_numOfOptionsInMainMenu);
+                int option = getMenuOptionFromUser(numOfOptions);
                 try
                 {
                     switch (option)
@@ -182,7 +177,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             string ownerPhone = getOwnerPhoneFromUser();
             string vehicleModel = getVehicleModelFromUser();
             string wheelsManufaturer = getTireManufactorerFromUser();
-            float CurrentWheelAirPreasure = getCurrentTireAirPressureFromUser();
+            float currentWheelAirPreasure = getCurrentTireAirPressureFromUser();
             string ownerName = getOwnerNameFromUser();
             try
             {
@@ -192,28 +187,28 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                         motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
                         motorcycleEngineSize = getMotorcycleCcFromUser();
                         currentFuelAmmount = getCurrentFuelAmountFromUser();
-                        vehicle = VehicleFactory.GenerateFuelMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount);
+                        vehicle = VehicleFactory.GenerateFuelMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, currentWheelAirPreasure, currentFuelAmmount);
                         break;
 
                     case eVehicleType.ElectricMorotcycle:
                         motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
                         motorcycleEngineSize = getMotorcycleCcFromUser();
                         currentEnergyLeft = getCurrentEnergyLeftFromUser();
-                        vehicle = VehicleFactory.GenerateElectricMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, CurrentWheelAirPreasure, currentEnergyLeft);
+                        vehicle = VehicleFactory.GenerateElectricMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, currentWheelAirPreasure, currentEnergyLeft);
                         break;
 
                     case eVehicleType.FuelCar:
                         carColor = getColorTypeFromUser();
                         numOfDoors = getNumOfDoorsFromUser();
                         currentFuelAmmount = getCurrentFuelAmountFromUser();
-                        vehicle = VehicleFactory.GenerateFuelCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount);
+                        vehicle = VehicleFactory.GenerateFuelCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, currentWheelAirPreasure, currentFuelAmmount);
                         break;
 
                     case eVehicleType.ElectricCar:
                         carColor = getColorTypeFromUser();
                         numOfDoors = getNumOfDoorsFromUser();
                         currentEnergyLeft = getCurrentEnergyLeftFromUser();
-                        vehicle = VehicleFactory.GenerateElectricCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, CurrentWheelAirPreasure, currentEnergyLeft);
+                        vehicle = VehicleFactory.GenerateElectricCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, currentWheelAirPreasure, currentEnergyLeft);
                         break;
 
                     case eVehicleType.Truck:
@@ -221,7 +216,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                         maxCargoWeight = getMaxCargoCargoWeightFromUser();
                         currentCargoWeight = getCurrentCargoCargoWeightFromUser();
                         currentFuelAmmount = getCurrentFuelAmountFromUser();
-                        vehicle = VehicleFactory.GenerateTruck(vehicleModel, i_LicencePlate, maxCargoWeight, currentCargoWeight, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount); // current cargo weight
+                        vehicle = VehicleFactory.GenerateTruck(vehicleModel, i_LicencePlate, maxCargoWeight, currentCargoWeight, wheelsManufaturer, currentWheelAirPreasure, currentFuelAmmount, isCarryngDangerousMaterials);
                         break;
 
                     default:
@@ -325,7 +320,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private bool getBoolFromUser()
         {
             const int numOfOptions = 2;
-            bool isTrue = true;;
+            bool isTrue = true;
             
             Console.WriteLine(" (1) Yes.");
             Console.WriteLine(" (2) No.");

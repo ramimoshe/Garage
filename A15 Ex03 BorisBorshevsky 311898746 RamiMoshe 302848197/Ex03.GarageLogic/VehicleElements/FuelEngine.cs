@@ -5,7 +5,7 @@ namespace Ex03.GarageLogic.VehicleElements
 {
     public class FuelEngine : Engine
     {
-        private const float k_minimumAmountToFuel = 0f;
+        private const float k_MinimumAmountToFuel = 0f;
 
         private readonly eFuelType r_FuelType;
         private readonly float r_MaxFuelAmount;
@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic.VehicleElements
         {
             if (i_CurrentFuelAmount > i_MaxFuelAmount)
             {
-                throw new ValueOutOfRangeException("Cant fill more then maximum amount of fuel", k_minimumAmountToFuel, i_MaxFuelAmount);
+                throw new ValueOutOfRangeException("Cant fill more then maximum amount of fuel", k_MinimumAmountToFuel, i_MaxFuelAmount);
             }
             
             r_FuelType = i_FuelType;
@@ -28,14 +28,14 @@ namespace Ex03.GarageLogic.VehicleElements
 
         private void Fuel(float i_AmountToAdd, eFuelType i_FuelType)
         {
-            if (i_AmountToAdd < k_minimumAmountToFuel)
+            if (i_AmountToAdd < k_MinimumAmountToFuel)
             {
-                throw new ArgumentException("Cant add amount below " + k_minimumAmountToFuel.ToString());
+                throw new ArgumentException("Cant add amount below " + k_MinimumAmountToFuel.ToString());
             }
 
             if (i_AmountToAdd + CurrentFuelAmount > r_MaxFuelAmount)
             {
-                throw new ValueOutOfRangeException("Cant fill more then the maximum fuel", k_minimumAmountToFuel, r_MaxFuelAmount);
+                throw new ValueOutOfRangeException("Cant fill more then the maximum fuel", k_MinimumAmountToFuel, r_MaxFuelAmount);
             }
 
             if (FuelType != i_FuelType)

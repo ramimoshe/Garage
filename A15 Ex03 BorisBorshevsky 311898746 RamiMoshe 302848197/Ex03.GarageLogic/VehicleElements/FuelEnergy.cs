@@ -4,10 +4,10 @@
     {
         public eFuelType FuelType { get; set; }
 
-        public FuelEnergy(eFuelType i_fuelType, float i_Amount)
+        public FuelEnergy(eFuelType i_FuelType, float i_Amount)
             :base(i_Amount)
         {
-            FuelType = i_fuelType;
+            FuelType = i_FuelType;
         }
     }
 }
