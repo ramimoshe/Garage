@@ -4,11 +4,20 @@ namespace Ex03.GarageLogic.VehicleElements
 {
     public class ElectricEngine
     {
+        private const float k_minimumWorkHoursRemining = 0f;
+
         public readonly float r_MaxWorkHour;
 
-        public ElectricEngine(float i_MaxWorkHour)
+        private float m_WorkHoursRemining;
+
+        public ElectricEngine(float i_WorkHoursRemining, float i_MaxWorkHour)
         {
-            WorkHoursRemining = 0;
+            if (i_WorkHoursRemining > i_MaxWorkHour)
+            {
+                throw new ValueOutOfRangeException("Cant fill electric more then the maximum work hour", k_minimumWorkHoursRemining, i_MaxWorkHour);    
+            }
+
+            WorkHoursRemining = i_WorkHoursRemining;
             r_MaxWorkHour = i_MaxWorkHour;
         }
 
@@ -27,6 +36,11 @@ namespace Ex03.GarageLogic.VehicleElements
             WorkHoursRemining += i_Amount;
         }
 
-        public float WorkHoursRemining { get; private set; }
+        public float WorkHoursRemining
+        {
+            get { return m_WorkHoursRemining; }
+            private set { m_WorkHoursRemining = value; }
+        }
+
     }
 }

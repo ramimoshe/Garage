@@ -39,7 +39,7 @@
         Payed
     }
 
-    enum eVehicleType
+    public enum eVehicleType
     {
         ElectricCar = 1,
         FuelCar,

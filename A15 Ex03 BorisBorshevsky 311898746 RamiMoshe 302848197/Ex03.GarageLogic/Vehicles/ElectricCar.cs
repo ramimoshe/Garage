@@ -9,10 +9,10 @@ namespace Ex03.GarageLogic.Vehicles
         
         private const float k_MaxWorkHour = 2.6f;
 
-        public ElectricCar(string i_ModelName, string i_SerialNumber, List<Wheel> i_Wheels, eCarColor i_Color, eNumOfDoors i_Doors)
+        public ElectricCar(string i_ModelName, string i_SerialNumber, List<Wheel> i_Wheels, eCarColor i_Color, eNumOfDoors i_Doors, float i_WorkHoursRemining)
             : base(i_ModelName, i_SerialNumber, i_Wheels, i_Color, i_Doors)
         {
-            r_Engine = new ElectricEngine(MaxWorkHour);
+            r_Engine = new ElectricEngine(i_WorkHoursRemining, MaxWorkHour);
         }
 
         private ElectricEngine Engine

@@ -8,10 +8,10 @@ namespace Ex03.GarageLogic.Vehicles
     {
         public readonly FuelEngine r_Engine;
 
-        public FuelMorotcycle(string i_ModelName, string i_SerialNumber, List<Wheel> i_Wheels, eMotorcycleLicenseType i_LicenseType, int i_EngineCc)
+        public FuelMorotcycle(string i_ModelName, string i_SerialNumber, List<Wheel> i_Wheels, eMotorcycleLicenseType i_LicenseType, int i_EngineCc, float i_CurrenctFuelAmount)
             :base(i_ModelName, i_SerialNumber, i_Wheels, i_LicenseType, i_EngineCc)
         {
-            r_Engine = new FuelEngine(eFuelType.Octan96, 0, 6.5f);
+            r_Engine = new FuelEngine(eFuelType.Octan96, i_CurrenctFuelAmount, 6.5f);
         }
 
         public override float GetEnergyLeftPrecent()
