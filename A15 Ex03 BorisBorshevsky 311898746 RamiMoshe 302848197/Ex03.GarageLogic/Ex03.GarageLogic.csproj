@@ -35,7 +35,6 @@
     <Compile Include="VehicleElements\ElectricEnergy.cs" />
     <Compile Include="VehicleElements\FuelEnergy.cs" />
     <Compile Include="Vehicles\Car.cs" />
-    <Compile Include="CarReport.cs" />
     <Compile Include="VehicleElements\ElectricEngine.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
