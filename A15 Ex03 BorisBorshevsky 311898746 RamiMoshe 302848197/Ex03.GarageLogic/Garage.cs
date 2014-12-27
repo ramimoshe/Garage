@@ -72,7 +72,7 @@ namespace Ex03.GarageLogic
             throw new ArgumentException("Licence card not found");
         }
 
-        public CarReport GetCarReport(string i_serialNumber)
+        public string GetCarReport(string i_serialNumber)
         {
             throw new ArgumentException("Licence card not found");
         }

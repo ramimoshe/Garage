@@ -335,7 +335,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             string vehicleSerialId = getVehicleSerialFromUser();
             try 
             { 
-                CarReport carReport = Garage.GetCarReport(vehicleSerialId);
+                Reports carReport = Garage.GetCarReport(vehicleSerialId);
                 Console.WriteLine(carReport.ToString());
             }
             catch (ArgumentException ae)
