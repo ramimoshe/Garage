@@ -402,7 +402,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private void showAllVechaleLicensePlates()
         {
             int counter = 0;
-            foreach (string licensePlate in Garage.GetSerialNumbersInGarage())
+            foreach (string licensePlate in Garage.GetLicencePlatesInGarage())
             {
                 counter++;
                 Console.WriteLine("({0}) {1}.",counter , licensePlate);
@@ -585,7 +585,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private void showFilteredListOfLicensePlates(eVehicleState i_FilteredBy)
         {
             int counter = 0;
-            foreach (string licensePlate in Garage.GetSerialNumbersInGarage(i_FilteredBy))
+            foreach (string licensePlate in Garage.GetLicencePlatesInGarage(i_FilteredBy))
             {
                 counter++;
                 Console.WriteLine("({0}) {1}.", counter, licensePlate);

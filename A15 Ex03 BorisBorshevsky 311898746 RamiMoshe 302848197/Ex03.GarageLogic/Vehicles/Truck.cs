@@ -17,8 +17,8 @@ namespace Ex03.GarageLogic.Vehicles
 
         public float CurrentCargoWeight { get; set; }
 
-        public Truck(string i_ModelName, string i_SerialNumber, List<Tire> i_Tires, float i_MaxCargoWeightAllowed, Engine i_Engine)
-            : base(i_ModelName, i_SerialNumber, i_Tires, i_Engine)
+        public Truck(string i_ModelName, string i_LicencePlate, List<Tire> i_Tires, float i_MaxCargoWeightAllowed, Engine i_Engine)
+            : base(i_ModelName, i_LicencePlate, i_Tires, i_Engine)
         {
             r_MaxCargoWeightAllowed = i_MaxCargoWeightAllowed;
         }
