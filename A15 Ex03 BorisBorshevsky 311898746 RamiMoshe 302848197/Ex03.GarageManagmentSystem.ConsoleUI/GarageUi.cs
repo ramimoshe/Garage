@@ -118,9 +118,9 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             stringBuilder.AppendLine(" (2) Show a list of Vehicles in the garage.");
             stringBuilder.AppendLine(" (3) Change vehicle state.");
             stringBuilder.AppendLine(" (4) Fill air in vehicle's wheels.");
-            stringBuilder.AppendLine(" (5) Change vehicle state.");
-            stringBuilder.AppendLine(" (6) Fuel your vehicle (fuel Engine).");
-            stringBuilder.AppendLine(" (7) Recharge your vehicle (electric Engine)");
+            stringBuilder.AppendLine(" (5) Fuel your vehicle (fuel Engine).");
+            stringBuilder.AppendLine(" (6) Recharge your vehicle (electric Engine)");
+            stringBuilder.AppendLine(" (7) Report about your vehicle.");
             stringBuilder.AppendLine(" (8) Exit.");
             Console.WriteLine(stringBuilder);
         }
@@ -168,50 +168,64 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             string wheelsManufaturer = getTireManufactorerFromUser();
             float CurrentWheelAirPreasure = getCurrentTireAirPressureFromUser();
             string ownerName = getOwnerNameFromUser();
-
-            switch (vehicleType)
+            try
             {
-                case eVehicleType.FuelMorotcycle:
-                    motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
-                    motorcycleEngineSize = getMotorcycleCcFromUser();
-                    currentFuelAmmount = getCurrentFuelAmountFromUser();
-                    vehicle = VehicleFactory.GenerateFuelMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount);
-                    break;
-                
-                case eVehicleType.ElectricMorotcycle:
-                    motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
-                    motorcycleEngineSize = getMotorcycleCcFromUser();
-                    currentEnergyLeft = getCurrentEnergyLeftFromUser();
-                    vehicle = VehicleFactory.GenerateElectricMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, CurrentWheelAirPreasure, currentEnergyLeft);
-                    break;
-               
-                case eVehicleType.FuelCar:
-                    carColor = getColorTypeFromUser();
-                    numOfDoors = getNumOfDoorsFromUser();
-                    currentFuelAmmount = getCurrentFuelAmountFromUser();
-                    vehicle = VehicleFactory.GenerateFuelCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount);
-                    break;
-                
-                case eVehicleType.ElectricCar:
-                    carColor = getColorTypeFromUser();
-                    numOfDoors = getNumOfDoorsFromUser();
-                    currentEnergyLeft = getCurrentEnergyLeftFromUser();
-                    vehicle = VehicleFactory.GenerateElectricCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, CurrentWheelAirPreasure, currentEnergyLeft);
-                    break;
-               
-                case eVehicleType.Truck:
-                    isCarryngDangerousMaterials = getIsCarryingDangerousMaterialsFromUser();
-                    maxCargoWeight = getMaxCargoCargoWeightFromUser();
-                    currentCargoWeight = getCurrentCargoCargoWeightFromUser();
-                    currentFuelAmmount = getCurrentFuelAmountFromUser();
-                    vehicle = VehicleFactory.GenerateTruck(vehicleModel, i_LicencePlate, maxCargoWeight, currentCargoWeight, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount); // current cargo weight
-                    break;
+                switch (vehicleType)
+                {
+                    case eVehicleType.FuelMorotcycle:
+                        motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
+                        motorcycleEngineSize = getMotorcycleCcFromUser();
+                        currentFuelAmmount = getCurrentFuelAmountFromUser();
+                        vehicle = VehicleFactory.GenerateFuelMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount);
+                        break;
 
-                default:
-                    throw new ArgumentException("not a vehicle availble at the menu");
-            }
-            
+                    case eVehicleType.ElectricMorotcycle:
+                        motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
+                        motorcycleEngineSize = getMotorcycleCcFromUser();
+                        currentEnergyLeft = getCurrentEnergyLeftFromUser();
+                        vehicle = VehicleFactory.GenerateElectricMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, CurrentWheelAirPreasure, currentEnergyLeft);
+                        break;
+
+                    case eVehicleType.FuelCar:
+                        carColor = getColorTypeFromUser();
+                        numOfDoors = getNumOfDoorsFromUser();
+                        currentFuelAmmount = getCurrentFuelAmountFromUser();
+                        vehicle = VehicleFactory.GenerateFuelCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount);
+                        break;
+
+                    case eVehicleType.ElectricCar:
+                        carColor = getColorTypeFromUser();
+                        numOfDoors = getNumOfDoorsFromUser();
+                        currentEnergyLeft = getCurrentEnergyLeftFromUser();
+                        vehicle = VehicleFactory.GenerateElectricCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, CurrentWheelAirPreasure, currentEnergyLeft);
+                        break;
+
+                    case eVehicleType.Truck:
+                        isCarryngDangerousMaterials = getIsCarryingDangerousMaterialsFromUser();
+                        maxCargoWeight = getMaxCargoCargoWeightFromUser();
+                        currentCargoWeight = getCurrentCargoCargoWeightFromUser();
+                        currentFuelAmmount = getCurrentFuelAmountFromUser();
+                        vehicle = VehicleFactory.GenerateTruck(vehicleModel, i_LicencePlate, maxCargoWeight, currentCargoWeight, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount); // current cargo weight
+                        break;
+
+                    default:
+                        throw new ArgumentException("not a vehicle availble at the menu");
+                }
+
            Garage.CreateTicket(ownerName, ownerPhone, vehicle);
+           }
+           catch (ArgumentException ae)
+           {
+               Console.WriteLine("Operation Failed - bad argument");
+               Console.WriteLine(ae.Message);
+           }
+           catch (ValueOutOfRangeException voore)
+           {
+               Console.WriteLine("Operation Failed - bad value entered");
+               Console.WriteLine(voore.Message);
+           }
+            
+
         }
 
         private static string getOwnerPhoneFromUser()
