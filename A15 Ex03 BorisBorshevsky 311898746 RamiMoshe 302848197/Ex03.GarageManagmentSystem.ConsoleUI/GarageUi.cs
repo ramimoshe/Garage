@@ -13,7 +13,10 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private const int k_numOfOptionsInShowSerialsNumbersMenu = 3;
         private const int k_numOfVehicleStates = 3;
         private const int k_numOfFuelTypes = 4;
-
+        private const int k_numOfVehicleTypes = 5;
+        private const int k_numOfMotorcycleLicenseTypes = 4;
+        private const int k_numOfColors = 4;
+        private const bool v_isPossitiveNumberOnly = true;
         private Garage Garage { get; set; }
 
         public GarageConsoleUi()
@@ -85,13 +88,13 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return optionFromUser;
         }
 
-        private int getIntFromUser()
+        private uint getUintFromUser()
         {
-            int optionFromUser;
+            uint optionFromUser;
 
-            while (!int.TryParse(Console.ReadLine(), out optionFromUser))
+            while (!uint.TryParse(Console.ReadLine(), out optionFromUser))
             {
-                Console.WriteLine("Invalid input, Please enter a number only.");
+                Console.WriteLine("Invalid input, Please enter a positive number only.");
             }
 
             return optionFromUser;
@@ -117,8 +120,157 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 
         private void insertVehicleToGarage()
         {
+            Console.WriteLine("Please enter your car's licence plate");
+            string serialNumber = Console.ReadLine();
+            
+            bool isInGarage = true;
+            //bool isInGarage = Garage.IsVehicleInGarage(serialNumber);
+            if (!isInGarage)
+            {
+                Console.WriteLine("Your car isn't in the garage. Please enter your car's details in order to instert is.");
+                Console.WriteLine();
+
+                InsertNewCarToGarage(serialNumber);
+            }
+
 
         }
+
+        private void InsertNewCarToGarage(string i_LicencePlate)
+        {
+            eVehicleType vehicleType = getVehicleTypeFromUser();
+            Console.Write("Please enter your vehicle's Manufactirer:  ");
+            string carsManufactorer = Console.ReadLine();
+
+
+            if (vehicleType == eVehicleType.ElectricCar || vehicleType == eVehicleType.FuelCar)
+            {
+                eCarColor carColor = getColorTypeFromUser();
+                eNumOfDoors numOfDoors = getNumOfDoorsFromUser();
+            }
+            else if (vehicleType == eVehicleType.ElectricMorotcycle || vehicleType == eVehicleType.FuelMorotcycle)
+            {
+                eMotorcycleLicenseType motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
+                uint motorcycleEngineSize = getMotorcycleCcFromUser();
+            }
+            else if (vehicleType == eVehicleType.Truck)
+            {
+                Console.WriteLine("Is your truck carring dangerous materials?");
+                bool isCarryngDangerousMatorials = getBoolFromUser();
+
+                float maxCargoWeight = getMaxCargoCargoWeightFromUser();
+                float currentCargoWeight = getCurrentCargoCargoWeightFromUser();
+            }
+
+            Console.Write("Please enter your vehicle's wheels Manufactirer:  ");
+            string wheelsManufaturer = Console.ReadLine();
+            Console.Write("Please enter your vehicle's wheels current air pressure:  ");
+            float CurrentWheelAirPreasure = getFloatFromUser(v_isPossitiveNumberOnly);
+        }
+
+        private float getCurrentCargoCargoWeightFromUser()
+        {
+            Console.WriteLine("What is your current cargo weight?");
+            return getFloatFromUser(v_isPossitiveNumberOnly);
+        }
+
+        private float getMaxCargoCargoWeightFromUser()
+        {
+            Console.WriteLine("What is your Max cargo weight?");
+            return getFloatFromUser(v_isPossitiveNumberOnly);
+        }
+
+
+        private eNumOfDoors getNumOfDoorsFromUser()
+        {
+            const int k_numOfOptions = 4;
+            
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("How many doors do you have?");
+            stringBuilder.AppendLine(" (1) Two.");
+            stringBuilder.AppendLine(" (2) Three.");
+            stringBuilder.AppendLine(" (3) Four.");
+            stringBuilder.AppendLine(" (4) Five.");
+            Console.WriteLine(stringBuilder);
+
+            int option = getMenuOptionFromUser(k_numOfOptions);
+
+            return (eNumOfDoors)option;
+        }
+
+
+        private bool getBoolFromUser()
+        {
+            const int numOfOptions = 2;
+            bool isTrue = true;;
+            
+            Console.WriteLine(" (1) Yes.");
+            Console.WriteLine(" (2 No.");
+            
+            int result = getMenuOptionFromUser(numOfOptions);
+            if (result == 2)
+            {
+                isTrue = false;
+            }
+
+            return isTrue;
+        }
+
+        private eMotorcycleLicenseType getMotorcycleLicenseTypeFromUser()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("What is the motorcycle license type type?");
+            stringBuilder.AppendLine(" (1) A.");
+            stringBuilder.AppendLine(" (2) A1.");
+            stringBuilder.AppendLine(" (3) AB.");
+            stringBuilder.AppendLine(" (4) B2.");
+            Console.WriteLine(stringBuilder);
+
+            int option = getMenuOptionFromUser(k_numOfMotorcycleLicenseTypes);
+            
+            return (eMotorcycleLicenseType)option;
+        }
+
+        private uint getMotorcycleCcFromUser()
+        {
+            Console.WriteLine("What is the motorcycle engine size (CC)?");
+            return getUintFromUser();
+        }
+
+
+        private eVehicleType getVehicleTypeFromUser()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("What is your vehicle type?");
+            stringBuilder.AppendLine(" (1) Fuel MotorCycle.");
+            stringBuilder.AppendLine(" (2) Electric MotorCycle.");
+            stringBuilder.AppendLine(" (3) Fuel Car.");
+            stringBuilder.AppendLine(" (4) Electric Car.");
+            stringBuilder.AppendLine(" (5) Truck.");
+            Console.WriteLine(stringBuilder);
+
+            int option = getMenuOptionFromUser(k_numOfVehicleTypes);
+
+            return (eVehicleType)option;
+        }
+
+        private eCarColor getColorTypeFromUser()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("What is your vehicle Color?");
+            stringBuilder.AppendLine(" (1) Blue.");
+            stringBuilder.AppendLine(" (2) Green.");
+            stringBuilder.AppendLine(" (3) Red.");
+            stringBuilder.AppendLine(" (4) White.");
+            Console.WriteLine(stringBuilder);
+            
+            int option = getMenuOptionFromUser(k_numOfColors);
+
+            return (eCarColor)option;
+        }
+
+
+
 
         private void vehicleSerialNumbersMenu()
         {
@@ -278,7 +430,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             eFuelType fuelType = getFuelTypeFromUser();
 
             Console.WriteLine("Please enter the amount to fuel:");
-            float amountToFuel = getFloatFromUser();
+            float amountToFuel = getFloatFromUser(v_isPossitiveNumberOnly);
 
             try
             {
@@ -296,11 +448,11 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             }
         }
 
-        private float getFloatFromUser()
+        private float getFloatFromUser(bool isPossitiveOnly)
         {
             float optionFromUser;
 
-            while (!float.TryParse(Console.ReadLine(), out optionFromUser))
+            while (!float.TryParse(Console.ReadLine(), out optionFromUser) || (optionFromUser < 0 || !isPossitiveOnly))
             {
                 Console.WriteLine("Invalid input, Please choose floating point number only.");
             }
@@ -315,7 +467,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             string vehicleSerialId = getVehicleSerialFromUser();
 
             Console.WriteLine("for how many minutes whould you like to charge");
-            int minutesToCharge = getIntFromUser();
+            uint minutesToCharge = getUintFromUser();
 
             try
             {

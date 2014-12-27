@@ -2,26 +2,26 @@
 {
     public enum eMotorcycleLicenseType
     {
-        A,
-        A1,
-        AB,
-        B2
+        A = 1,
+        A1 = 2,
+        AB = 3,
+        B2 = 4
     }
 
     public enum eCarColor
     {
-        White,
-        Green,
-        Blue,
-        Red
+        Blue = 1,
+        Green = 2,
+        Red = 3,
+        White = 4,
     }
 
     public enum eNumOfDoors
     {
-        Two = 2,
-        Three = 3,
-        Four = 4,
-        Five = 5
+        Two = 1,
+        Three = 2,
+        Four = 3,
+        Five = 4
     }
 
     public enum eFuelType
@@ -41,10 +41,10 @@
 
     public enum eVehicleType
     {
-        ElectricCar = 1,
-        FuelCar,
-        ElectricMorotcycle,
-        FuelMorotcycle,
-        Truck
+        FuelMorotcycle = 1,
+        ElectricMorotcycle = 2,
+        FuelCar = 3,
+        ElectricCar = 4,
+        Truck = 5
     }
 }
