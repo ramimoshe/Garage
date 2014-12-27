@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex03.GarageLogic.VehicleElements
+﻿namespace Ex03.GarageLogic.VehicleElements
 {
     public abstract class Engery
     {
+        public float Amount { get; set; }
+
         protected Engery(float i_Amount)
         {
             Amount = i_Amount;
-        }
-
-        public float Amount { get; set; }
+        } 
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Ex03.GarageLogic.VehicleElements;
 
 namespace Ex03.GarageLogic.Vehicles
@@ -19,7 +17,7 @@ namespace Ex03.GarageLogic.Vehicles
 
         public override float GetEnergyLeftPrecent()
         {
-            throw new NotImplementedException();
+            return Engine.GetEnergyLeftPrecent();
         }
     }
 }

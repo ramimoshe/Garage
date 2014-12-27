@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Ex03.GarageLogic.VehicleElements;
 
 namespace Ex03.GarageLogic.Vehicles

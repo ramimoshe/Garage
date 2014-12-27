@@ -6,8 +6,13 @@ namespace Ex03.GarageLogic.VehicleElements
     public class FuelEngine : Engine
     {
         private const float k_minimumAmountToFuel = 0f;
+
         private readonly eFuelType r_FuelType;
         private readonly float r_MaxFuelAmount;
+
+        public float CurrentFuelAmount { get; private set; }
+        public eFuelType FuelType { get { return r_FuelType; } }
+        public float MaxFuelAmount { get { return r_MaxFuelAmount; } }
 
         public FuelEngine(eFuelType i_FuelType, float i_CurrentFuelAmount, float i_MaxFuelAmount)
         {
@@ -51,16 +56,9 @@ namespace Ex03.GarageLogic.VehicleElements
             }
         }
 
-        public float CurrentFuelAmount { get; private set; }
-
-        public eFuelType FuelType
+        public override float GetEnergyLeftPrecent()
         {
-            get { return r_FuelType; }
-        }
-
-        public float MaxFuelAmount
-        {
-            get { return r_MaxFuelAmount; }
+            return CurrentFuelAmount / MaxFuelAmount;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Ex03.GarageLogic.Vehicles
 
         public override float GetEnergyLeftPrecent()
         {
-            return ((FuelEngine) Engine).CurrentFuelAmount/((FuelEngine) Engine).MaxFuelAmount;
+            return Engine.GetEnergyLeftPrecent();
         }
     }
 }
