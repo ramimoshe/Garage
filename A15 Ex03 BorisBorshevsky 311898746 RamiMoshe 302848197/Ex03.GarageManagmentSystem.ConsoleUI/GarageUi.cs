@@ -10,7 +10,6 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
     class GarageConsoleUi
     {
         private const int k_numOfOptionsInMainMenu = 8;
-        private const int k_numOfOptionsInShowSerialsNumbersMenu = 3;
         private const int k_numOfVehicleStates = 3;
         private const int k_numOfFuelTypes = 4;
         private const int k_numOfVehicleTypes = 5;
@@ -31,34 +30,43 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             {
                 printMainMenu();
                 int option = getMenuOptionFromUser(k_numOfOptionsInMainMenu);
-                switch (option)
+                try
                 {
-                    case 1:
-                        insertVehicleToGarage();
-                        break;
-                    case 2:
-                        vehicleSerialNumbersMenu();
-                        break;
-                    case 3:
-                        updateVehicleState();
-                        break;
-                    case 4:
-                        fillAirPresure();
-                        break;
-                    case 5:
-                        fuelVehicle();
-                        break;
-                    case 6:
-                        chargeVehicle();
-                        break;
-                    case 7:
-                        showVehicleReport();
-                        break;
-                    case 8:
-                        shouldExit = true;
-                        break;
+                    switch (option)
+                    {
+                        case 1:
+                            insertVehicleToGarage();
+                            break;
+                        case 2:
+                            vehicleLicensePlateNumbersMenu();
+                            break;
+                        case 3:
+                            updateVehicleState();
+                            break;
+                        case 4:
+                            fillAirPresure();
+                            break;
+                        case 5:
+                            fuelVehicle();
+                            break;
+                        case 6:
+                            chargeVehicle();
+                            break;
+                        case 7:
+                            showVehicleReport();
+                            break;
+                        case 8:
+                            shouldExit = true;
+                            break;
+                    }
                 }
-                
+                catch (Exception e)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Operation failed");
+                    Console.WriteLine(e.Message);
+                }
+               
                 if (option != 8) 
                 {
                     pressAnyKeyToContinue();
@@ -88,11 +96,11 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return optionFromUser;
         }
 
-        private uint getUintFromUser()
+        private int getIntFromUser(bool i_isPossitiveOnly)
         {
-            uint optionFromUser;
+            int optionFromUser;
 
-            while (!uint.TryParse(Console.ReadLine(), out optionFromUser))
+            while (!int.TryParse(Console.ReadLine(), out optionFromUser) || (optionFromUser < 0 || !i_isPossitiveOnly))
             {
                 Console.WriteLine("Invalid input, Please enter a positive number only.");
             }
@@ -100,7 +108,6 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return optionFromUser;
         }
         
-
         private void printMainMenu()
         {
             Console.Clear();
@@ -120,52 +127,139 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 
         private void insertVehicleToGarage()
         {
-            Console.WriteLine("Please enter your car's licence plate");
-            string serialNumber = Console.ReadLine();
+            string licensePlate = getLicensePlateFromUser();
             
-            bool isInGarage = true;
-            //bool isInGarage = Garage.IsVehicleInGarage(serialNumber);
+            bool isInGarage = Garage.IsVehicleExists(licensePlate);
             if (!isInGarage)
             {
                 Console.WriteLine("Your car isn't in the garage. Please enter your car's details in order to instert is.");
                 Console.WriteLine();
 
-                InsertNewCarToGarage(serialNumber);
+                InsertNewVehicleToGarage(licensePlate);
             }
-
-
+            else
+            {
+                Console.WriteLine("Vehicle Already in the garage!!");
+            }
         }
 
-        private void InsertNewCarToGarage(string i_LicencePlate)
+        private static string getLicensePlateFromUser()
         {
+            Console.WriteLine("Please enter your car's licence plate");
+            return Console.ReadLine();
+        }
+
+        private void InsertNewVehicleToGarage(string i_LicencePlate)
+        {
+            int motorcycleEngineSize;
+            float currentEnergyLeft;
+            float currentFuelAmmount;
+            bool isCarryngDangerousMaterials;
+            float maxCargoWeight;
+            float currentCargoWeight;
+            eCarColor carColor;
+            eNumOfDoors numOfDoors;
+            eMotorcycleLicenseType motorcycleLicenseType;
+            Vehicle vehicle;
+
             eVehicleType vehicleType = getVehicleTypeFromUser();
-            Console.Write("Please enter your vehicle's Manufactirer:  ");
-            string carsManufactorer = Console.ReadLine();
+            string ownerPhone = getOwnerPhoneFromUser();
+            string vehicleModel = getVehicleModelFromUser();
+            string wheelsManufaturer = getTireManufactorerFromUser();
+            float CurrentWheelAirPreasure = getCurrentTireAirPressureFromUser();
+            string ownerName = getOwnerNameFromUser();
 
-
-            if (vehicleType == eVehicleType.ElectricCar || vehicleType == eVehicleType.FuelCar)
+            switch (vehicleType)
             {
-                eCarColor carColor = getColorTypeFromUser();
-                eNumOfDoors numOfDoors = getNumOfDoorsFromUser();
-            }
-            else if (vehicleType == eVehicleType.ElectricMorotcycle || vehicleType == eVehicleType.FuelMorotcycle)
-            {
-                eMotorcycleLicenseType motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
-                uint motorcycleEngineSize = getMotorcycleCcFromUser();
-            }
-            else if (vehicleType == eVehicleType.Truck)
-            {
-                Console.WriteLine("Is your truck carring dangerous materials?");
-                bool isCarryngDangerousMatorials = getBoolFromUser();
+                case eVehicleType.FuelMorotcycle:
+                    motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
+                    motorcycleEngineSize = getMotorcycleCcFromUser();
+                    currentFuelAmmount = getCurrentFuelAmountFromUser();
+                    vehicle = VehicleFactory.GenerateFuelMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount);
+                    break;
+                
+                case eVehicleType.ElectricMorotcycle:
+                    motorcycleLicenseType = getMotorcycleLicenseTypeFromUser();
+                    motorcycleEngineSize = getMotorcycleCcFromUser();
+                    currentEnergyLeft = getCurrentEnergyLeftFromUser();
+                    vehicle = VehicleFactory.GenerateElectricMorotcycle(vehicleModel, i_LicencePlate, motorcycleLicenseType, motorcycleEngineSize, wheelsManufaturer, CurrentWheelAirPreasure, currentEnergyLeft);
+                    break;
+               
+                case eVehicleType.FuelCar:
+                    carColor = getColorTypeFromUser();
+                    numOfDoors = getNumOfDoorsFromUser();
+                    currentFuelAmmount = getCurrentFuelAmountFromUser();
+                    vehicle = VehicleFactory.GenerateFuelCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount);
+                    break;
+                
+                case eVehicleType.ElectricCar:
+                    carColor = getColorTypeFromUser();
+                    numOfDoors = getNumOfDoorsFromUser();
+                    currentEnergyLeft = getCurrentEnergyLeftFromUser();
+                    vehicle = VehicleFactory.GenerateElectricCar(vehicleModel, i_LicencePlate, carColor, numOfDoors, wheelsManufaturer, CurrentWheelAirPreasure, currentEnergyLeft);
+                    break;
+               
+                case eVehicleType.Truck:
+                    isCarryngDangerousMaterials = getIsCarryingDangerousMaterialsFromUser();
+                    maxCargoWeight = getMaxCargoCargoWeightFromUser();
+                    currentCargoWeight = getCurrentCargoCargoWeightFromUser();
+                    currentFuelAmmount = getCurrentFuelAmountFromUser();
+                    vehicle = VehicleFactory.GenerateTruck(vehicleModel, i_LicencePlate, maxCargoWeight, wheelsManufaturer, CurrentWheelAirPreasure, currentFuelAmmount); // current cargo weight
+                    break;
 
-                float maxCargoWeight = getMaxCargoCargoWeightFromUser();
-                float currentCargoWeight = getCurrentCargoCargoWeightFromUser();
+                default:
+                    throw new ArgumentException("not a vehicle availble at the menu");
             }
+            
+           Garage.CreateTicket(ownerName, ownerPhone, vehicle);
+        }
 
-            Console.Write("Please enter your vehicle's wheels Manufactirer:  ");
-            string wheelsManufaturer = Console.ReadLine();
+        private static string getOwnerPhoneFromUser()
+        {
+            Console.Write("please enter your phone number:  ");
+            return Console.ReadLine();
+        }
+
+        private static string getOwnerNameFromUser()
+        {
+            Console.Write("please enter your name:  ");
+            return Console.ReadLine();
+        }
+
+        private float getCurrentTireAirPressureFromUser()
+        {
             Console.Write("Please enter your vehicle's wheels current air pressure:  ");
-            float CurrentWheelAirPreasure = getFloatFromUser(v_isPossitiveNumberOnly);
+            return getFloatFromUser(v_isPossitiveNumberOnly);
+        }
+
+        private static string getTireManufactorerFromUser()
+        {
+            Console.Write("Please enter your vehicle's wheels Manufactirer:  ");
+            return Console.ReadLine();
+        }
+
+        private static string getVehicleModelFromUser()
+        {
+            Console.Write("Please enter your vehicle's model:  ");
+            return Console.ReadLine();
+        }
+
+        private float getCurrentEnergyLeftFromUser()
+        {
+            Console.WriteLine("How many hours left in your Engine's battary?");
+            return getFloatFromUser(v_isPossitiveNumberOnly);
+        }
+
+        private float getCurrentFuelAmountFromUser()
+        {
+            Console.WriteLine("How much fuel do you have? (Liters)");
+            return getFloatFromUser(v_isPossitiveNumberOnly);
+        }
+
+        private bool getIsCarryingDangerousMaterialsFromUser()
+        {
+            Console.WriteLine("Is your truck carring dangerous materials?");
+            return getBoolFromUser();
         }
 
         private float getCurrentCargoCargoWeightFromUser()
@@ -180,10 +274,9 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return getFloatFromUser(v_isPossitiveNumberOnly);
         }
 
-
         private eNumOfDoors getNumOfDoorsFromUser()
         {
-            const int k_numOfOptions = 4;
+            const int numOfOptions = 4;
             
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("How many doors do you have?");
@@ -193,7 +286,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             stringBuilder.AppendLine(" (4) Five.");
             Console.WriteLine(stringBuilder);
 
-            int option = getMenuOptionFromUser(k_numOfOptions);
+            int option = getMenuOptionFromUser(numOfOptions);
 
             return (eNumOfDoors)option;
         }
@@ -205,7 +298,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             bool isTrue = true;;
             
             Console.WriteLine(" (1) Yes.");
-            Console.WriteLine(" (2 No.");
+            Console.WriteLine(" (2) No.");
             
             int result = getMenuOptionFromUser(numOfOptions);
             if (result == 2)
@@ -218,6 +311,8 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 
         private eMotorcycleLicenseType getMotorcycleLicenseTypeFromUser()
         {
+            const int numOfMotorcycleLicenseTypes = 4;
+            
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("What is the motorcycle license type type?");
             stringBuilder.AppendLine(" (1) A.");
@@ -226,20 +321,21 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             stringBuilder.AppendLine(" (4) B2.");
             Console.WriteLine(stringBuilder);
 
-            int option = getMenuOptionFromUser(k_numOfMotorcycleLicenseTypes);
+            int option = getMenuOptionFromUser(numOfMotorcycleLicenseTypes);
             
             return (eMotorcycleLicenseType)option;
         }
 
-        private uint getMotorcycleCcFromUser()
+        private int getMotorcycleCcFromUser()
         {
             Console.WriteLine("What is the motorcycle engine size (CC)?");
-            return getUintFromUser();
+            return getIntFromUser(v_isPossitiveNumberOnly);
         }
-
 
         private eVehicleType getVehicleTypeFromUser()
         {
+            const int numOfOptions = 5;
+            
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("What is your vehicle type?");
             stringBuilder.AppendLine(" (1) Fuel MotorCycle.");
@@ -249,13 +345,15 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             stringBuilder.AppendLine(" (5) Truck.");
             Console.WriteLine(stringBuilder);
 
-            int option = getMenuOptionFromUser(k_numOfVehicleTypes);
+            int option = getMenuOptionFromUser(numOfOptions);
 
             return (eVehicleType)option;
         }
 
         private eCarColor getColorTypeFromUser()
         {
+            const int numOfOptions = 4;
+            
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("What is your vehicle Color?");
             stringBuilder.AppendLine(" (1) Blue.");
@@ -264,7 +362,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             stringBuilder.AppendLine(" (4) White.");
             Console.WriteLine(stringBuilder);
             
-            int option = getMenuOptionFromUser(k_numOfColors);
+            int option = getMenuOptionFromUser(numOfOptions);
 
             return (eCarColor)option;
         }
@@ -272,28 +370,10 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 
 
 
-        private void vehicleSerialNumbersMenu()
+        private void vehicleLicensePlateNumbersMenu()
         {
-            printVehicleSerialNumbersMenu();
-
-            int option = getMenuOptionFromUser(k_numOfOptionsInShowSerialsNumbersMenu);
-            switch (option)
-            {
-                case 1:
-                    showAllVechaleSerialNumbers();
-                    break;
-                case 2:
-                    filteredVehicleSerialNumbersMenu();
-                    break;
-                case 3:
-                    break;
-            }
-
-            return;
-        }
-
-        private static void printVehicleSerialNumbersMenu()
-        {
+            const int numOfOptions = 3;
+            
             Console.Clear();
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("Please choose what would you like to do:");
@@ -302,38 +382,38 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             stringBuilder.AppendLine(" (2) Show vehicles in the garage filtered by state.");
             stringBuilder.AppendLine(" (3) Back to previous menu");
             Console.WriteLine(stringBuilder);
-        }
-
-        private void showAllVechaleSerialNumbers()
-        {
-            /*Garage.GetGarageTickets().Keys;
-            foreach (KeyValuePair<string, string> entry in MyDic)
-            {
-                // do something with entry.Value or entry.Key
-            }*/
-        }
-
-
-        private void filteredVehicleSerialNumbersMenu()
-        {
-            printFilteredVehicleSerialNumbersMenu();
-            int optionFromUser = getMenuOptionFromUser(k_numOfVehicleStates);
-            switch (optionFromUser)
+            
+            int option = getMenuOptionFromUser(numOfOptions);
+            
+            switch (option)
             {
                 case 1:
-                    showFilteredListOfSerialNumbers(eVehicleState.Amendment);
+                    showAllVechaleLicensePlates();
                     break;
                 case 2:
-                    showFilteredListOfSerialNumbers(eVehicleState.Fixed);
+                    filteredVehicleLicensePlatesMenu();
                     break;
                 case 3:
-                    showFilteredListOfSerialNumbers(eVehicleState.Payed);
                     break;
             }
         }
 
-        private void printFilteredVehicleSerialNumbersMenu()
+
+        private void showAllVechaleLicensePlates()
         {
+            int counter = 0;
+            foreach (string licensePlate in Garage.GetGarageTickets())
+            {
+                counter++;
+                Console.WriteLine("({0}) {1}.",counter , licensePlate);
+            }
+        }
+
+
+        private void filteredVehicleLicensePlatesMenu()
+        {
+            const int numOfOptions = 3;
+            
             Console.Clear();
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine("by What State do you want to Filter:");
@@ -342,37 +422,49 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             stringBuilder.AppendLine(" (2) Fixed.");
             stringBuilder.AppendLine(" (3) Payed.");
             Console.Write(stringBuilder);
-        }
 
+            int optionFromUser = getMenuOptionFromUser(numOfOptions);
+            switch (optionFromUser)
+            {
+                case 1:
+                    showFilteredListOfLicensePlates(eVehicleState.Amendment);
+                    break;
+                case 2:
+                    showFilteredListOfLicensePlates(eVehicleState.Fixed);
+                    break;
+                case 3:
+                    showFilteredListOfLicensePlates(eVehicleState.Payed);
+                    break;
+            }
+        }
+        
         private void updateVehicleState()
         {
+            const int numOfOptions = 3;
             
-            Console.WriteLine();
             Console.WriteLine("You are about to update vehicle state");
-
-            string vehicleSerialId = getVehicleSerialFromUser();
-
+            string licensePlate = getLicensePlateFromUser();
             Console.WriteLine();
             Console.WriteLine("Please Choose the new state:");
             Console.WriteLine(" (1) Fix in progress.");
             Console.WriteLine(" (2) Fixed.");
             Console.WriteLine(" (3) Payed.");
-            int option = getMenuOptionFromUser(k_numOfVehicleStates);
+            int option = getMenuOptionFromUser(numOfOptions);
             try
             {
                 switch (option)
                 {
                     case 1:
-                        Garage.UpdateVehicleState(vehicleSerialId, eVehicleState.Amendment);
+                        Garage.UpdateVehicleState(licensePlate, eVehicleState.Amendment);
                         break;
                     case 2:
-                        Garage.UpdateVehicleState(vehicleSerialId, eVehicleState.Fixed);
+                        Garage.UpdateVehicleState(licensePlate, eVehicleState.Fixed);
                         break;
                     case 3:
-                        Garage.UpdateVehicleState(vehicleSerialId, eVehicleState.Payed);
+                        Garage.UpdateVehicleState(licensePlate, eVehicleState.Payed);
                         break;
                 }
-                Console.WriteLine("State for vehicle {0} updated", vehicleSerialId);
+                Console.WriteLine("State for vehicle {0} updated", licensePlate);
             }
             catch (ArgumentException ae)
             {
@@ -381,23 +473,16 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             }
         }
 
-        private static string getVehicleSerialFromUser()
-        {
-            Console.WriteLine("Please enter the vehicle serial ID:");
-            string vehicleSerialId = Console.ReadLine();
-            return vehicleSerialId;
-        }
-
         private void fillAirPresure()
         {
             Console.WriteLine();
             Console.WriteLine("You are about to fill your vehicle whells:");
             
-            string vehicleSerialId = getVehicleSerialFromUser();
+            string licensePlate = getLicensePlateFromUser();
 
             try
             {
-                Garage.FillManufacturerAirpressure(vehicleSerialId);
+                Garage.FillManufacturerAirpressure(licensePlate);
             }
             catch (ArgumentException ae)
             {
@@ -423,7 +508,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         {
             Console.WriteLine();
             Console.WriteLine("You are about to fuel your vehicle:");
-            string vehicleSerialId = getVehicleSerialFromUser();
+            string licensePlate = getLicensePlateFromUser();
 
             Console.WriteLine();
             Console.WriteLine("Please Choose fuel type:");
@@ -434,7 +519,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 
             try
             {
-                Garage.FuelVehicle(vehicleSerialId, fuelType, amountToFuel);
+                Garage.FuelVehicle(licensePlate, fuelType, amountToFuel);
             }
             catch (ArgumentException ae)
             {
@@ -448,11 +533,11 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             }
         }
 
-        private float getFloatFromUser(bool isPossitiveOnly)
+        private float getFloatFromUser(bool i_isPossitiveOnly)
         {
             float optionFromUser;
 
-            while (!float.TryParse(Console.ReadLine(), out optionFromUser) || (optionFromUser < 0 || !isPossitiveOnly))
+            while (!float.TryParse(Console.ReadLine(), out optionFromUser) || (optionFromUser < 0 || !i_isPossitiveOnly))
             {
                 Console.WriteLine("Invalid input, Please choose floating point number only.");
             }
@@ -464,14 +549,14 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         {
             Console.WriteLine();
             Console.WriteLine("You are about to charge your vehicle:");
-            string vehicleSerialId = getVehicleSerialFromUser();
+            string licensePlate = getLicensePlateFromUser();
 
             Console.WriteLine("for how many minutes whould you like to charge");
-            uint minutesToCharge = getUintFromUser();
+            float hoursToCharge = getFloatFromUser(v_isPossitiveNumberOnly);
 
             try
             {
-                Garage.ChargeVehicle(vehicleSerialId, minutesToCharge);
+                Garage.ChargeVehicle(licensePlate, hoursToCharge);
             }
             catch (ValueOutOfRangeException voore)
             {
@@ -484,10 +569,10 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         {
             Console.WriteLine();
             Console.WriteLine("You are about to show Cars Report:");
-            string vehicleSerialId = getVehicleSerialFromUser();
+            string licensePlate = getLicensePlateFromUser();
             try 
-            { 
-                CarReport carReport = Garage.GetCarReport(vehicleSerialId);
+            {
+                CarReport carReport = Garage.GetCarReport(licensePlate);
                 Console.WriteLine(carReport.ToString());
             }
             catch (ArgumentException ae)
@@ -497,9 +582,14 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             } 
         }
 
-        private void showFilteredListOfSerialNumbers(eVehicleState i_FilteredBy)
+        private void showFilteredListOfLicensePlates(eVehicleState i_FilteredBy)
         {
-
+            int counter = 0;
+            foreach (string licensePlate in Garage.GetGarageTickets(i_FilteredBy))
+            {
+                counter++;
+                Console.WriteLine("({0}) {1}.", counter, licensePlate);
+            }
         }
 
     }
