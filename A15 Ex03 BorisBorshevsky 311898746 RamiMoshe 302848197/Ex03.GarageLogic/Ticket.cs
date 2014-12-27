@@ -10,28 +10,16 @@ namespace Ex03.GarageLogic
         private readonly string r_CarOwnerPhone;
         private readonly Vehicle r_Vehicle;
 
-        public Ticket(string i_CarOwnerName, string i_CarOwnerPhone,  Vehicle i_vehicle)
+        public string CarOwnerName { get { return r_CarOwnerName; } }
+        public string CarOwnerPhone { get { return r_CarOwnerPhone; } }
+        public Vehicle Vehicle { get { return r_Vehicle; } }
+        public eVehicleState CarState { get; set; }
+
+        public Ticket(string i_CarOwnerName, string i_CarOwnerPhone, Vehicle i_Vehicle)
         {
-            r_Vehicle = i_vehicle;
+            r_Vehicle = i_Vehicle;
             CarState = eVehicleState.Amendment;
         }
-
-        public string CarOwnerName
-        {
-            get { return r_CarOwnerName; }
-        }
-
-        public string CarOwnerPhone
-        {
-            get { return r_CarOwnerPhone; }
-        }
-
-        public Vehicle Vehicle
-        {
-            get { return r_Vehicle; }
-        }
-
-        public eVehicleState CarState { get; set; }
 
         public override string ToString()
         {

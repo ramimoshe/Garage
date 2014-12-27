@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Ex03.GarageLogic.VehicleElements;
 using Ex03.GarageLogic.Vehicles;
 
@@ -10,22 +9,19 @@ namespace Ex03.GarageLogic
     {
         private readonly Dictionary<string, Ticket> r_Tickets;
 
-        private Dictionary<string, Ticket> Tickets
-        {
-            get { return r_Tickets; }
-        }
+        private Dictionary<string, Ticket> Tickets { get { return r_Tickets; } }
 
         public Garage()
         {
             r_Tickets = new Dictionary<string, Ticket>();
         }
 
-        public void CreateTicket(string i_CarOwnerName, string i_CarOwnerPhone, Vehicle i_vehicle)
+        public void CreateTicket(string i_CarOwnerName, string i_CarOwnerPhone, Vehicle i_Vehicle)
         {
-            if (!IsVehicleExists(i_vehicle.SerialNumber))
+            if (!IsVehicleExists(i_Vehicle.SerialNumber))
             {
-                Ticket ticket = new Ticket(i_CarOwnerName, i_CarOwnerPhone, i_vehicle);
-                Tickets.Add(i_vehicle.SerialNumber, ticket);
+                Ticket ticket = new Ticket(i_CarOwnerName, i_CarOwnerPhone, i_Vehicle);
+                Tickets.Add(i_Vehicle.SerialNumber, ticket);
             }
         }
 
@@ -58,9 +54,9 @@ namespace Ex03.GarageLogic
             Tickets[i_SerialNumber].CarState = i_VehicleState;
         }
 
-        public void FillManufacturerAirpressure(string i_serialNumber)
+        public void FillManufacturerAirpressure(string i_SerialNumber)
         {
-            Tickets[i_serialNumber].Vehicle.FillManufacturerAirPressure();
+            Tickets[i_SerialNumber].Vehicle.FillManufacturerAirPressure();
         }
 
         public void FuelVehicle(string i_SerialNumber, eFuelType i_FuelType, float i_AmountCc)
@@ -75,17 +71,15 @@ namespace Ex03.GarageLogic
             Tickets[i_SerialNumber].Vehicle.Engine.FillEnergy(electricEnergy);
         }
 
-        public string GetCarReport(string i_serialNumber)
+        public string GetCarReport(string i_SerialNumber)
         {
             string report = String.Empty;
-            if (IsVehicleExists(i_serialNumber))
+            if (IsVehicleExists(i_SerialNumber))
             {
-                report = Tickets[i_serialNumber].ToString();
+                report = Tickets[i_SerialNumber].ToString();
             }
 
             return report;
         }
-
-        
     }
 }

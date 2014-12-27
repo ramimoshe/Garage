@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Ex03.GarageLogic.VehicleElements;
 using Ex03.GarageLogic.Vehicles;
 

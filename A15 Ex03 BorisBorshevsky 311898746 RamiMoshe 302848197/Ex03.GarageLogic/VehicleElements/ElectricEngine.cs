@@ -7,7 +7,10 @@ namespace Ex03.GarageLogic.VehicleElements
     {
         private const float k_MinimumWorkHoursRemining = 0f;
 
-        public readonly float r_MaxWorkHour;
+        private readonly float r_MaxWorkHour;
+
+        public float WorkHoursRemining { get; private set; }
+        public float MaxWorkHour { get { return r_MaxWorkHour; } }
 
         public ElectricEngine(float i_WorkHoursRemining, float i_MaxWorkHour)
         {
@@ -35,8 +38,6 @@ namespace Ex03.GarageLogic.VehicleElements
             WorkHoursRemining += i_Amount;
         }
 
-        public float WorkHoursRemining { get; private set; }
-
         public override void FillEnergy(Engery i_Energy)
         {
             if (i_Energy is FuelEnergy)
@@ -44,6 +45,11 @@ namespace Ex03.GarageLogic.VehicleElements
                 ElectricEnergy energy = (ElectricEnergy)i_Energy;
                 Charge(energy.Amount);
             }
+        }
+
+        public override float GetEnergyLeftPrecent()
+        {
+            return WorkHoursRemining / MaxWorkHour;
         }
     }
 }

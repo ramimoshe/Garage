@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic.Vehicles
 
         public override float GetEnergyLeftPrecent()
         {
-            throw new System.NotImplementedException();
+            return Engine.GetEnergyLeftPrecent();
         }
     }
 }
