@@ -5,12 +5,24 @@ namespace Ex03.GarageLogic.Vehicles
 {
     public class ElectricCar : Car
     {
-        public readonly ElectricEngine r_Engine;
+        private readonly ElectricEngine r_Engine;
+        
+        private const float k_MaxWorkHour = 2.6f;
 
-        public ElectricCar(string i_ModelName, string i_SerialNumber, List<Wheel> i_Wheels, eCarColor i_Color, eNumOfDoors i_Doors, ElectricEngine i_Engine)
+        public ElectricCar(string i_ModelName, string i_SerialNumber, List<Wheel> i_Wheels, eCarColor i_Color, eNumOfDoors i_Doors)
             : base(i_ModelName, i_SerialNumber, i_Wheels, i_Color, i_Doors)
         {
-            r_Engine = i_Engine;
+            r_Engine = new ElectricEngine(MaxWorkHour);
+        }
+
+        private ElectricEngine Engine
+        {
+            get { return r_Engine; }
+        }
+
+        public float MaxWorkHour
+        {
+            get { return k_MaxWorkHour; }
         }
 
         public override float GetEnergyLeftPrecent()

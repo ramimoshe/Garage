@@ -19,7 +19,7 @@ namespace Ex03.GarageLogic.Vehicles
 
         public abstract float GetEnergyLeftPrecent();
 
-        protected List<Wheel> Wheels;
+        protected List<Wheel> Wheels  { get; set; }
 
     }
 }

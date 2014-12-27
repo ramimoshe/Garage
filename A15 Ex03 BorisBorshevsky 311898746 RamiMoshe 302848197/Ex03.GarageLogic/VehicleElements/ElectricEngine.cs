@@ -6,9 +6,10 @@ namespace Ex03.GarageLogic.VehicleElements
     {
         public readonly float r_MaxWorkHour;
 
-        public ElectricEngine()
+        public ElectricEngine(float i_MaxWorkHour)
         {
             WorkHoursRemining = 0;
+            r_MaxWorkHour = i_MaxWorkHour;
         }
 
         public void Charge(float i_Amount)

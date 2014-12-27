@@ -38,4 +38,13 @@
         Fixed,
         Payed
     }
+
+    enum eVehicleType
+    {
+        ElectricCar = 1,
+        FuelCar,
+        ElectricMorotcycle,
+        FuelMorotcycle,
+        Truck
+    }
 }

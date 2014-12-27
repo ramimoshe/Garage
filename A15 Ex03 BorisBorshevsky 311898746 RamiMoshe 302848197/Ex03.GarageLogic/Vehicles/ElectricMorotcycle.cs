@@ -7,10 +7,23 @@ namespace Ex03.GarageLogic.Vehicles
     {
         public readonly ElectricEngine r_Engine;
 
-        public ElectricMorotcycle(string i_ModelName, string i_SerialNumber, List<Wheel> i_Wheels, eMotorcycleLicenseType i_LicenseType, int i_EngineCc, ElectricEngine i_Engine)
+        private const float k_MaxWorkHour = 1.8f;
+
+        public ElectricMorotcycle(string i_ModelName, string i_SerialNumber, List<Wheel> i_Wheels, eMotorcycleLicenseType i_LicenseType, int i_EngineCc)
             :base(i_ModelName, i_SerialNumber, i_Wheels, i_LicenseType, i_EngineCc)
         {
-            r_Engine = i_Engine;
+            r_Engine = new ElectricEngine(MaxWorkHour);
+        }
+
+        private ElectricEngine Engine
+        {
+            get { return r_Engine; }
+        }
+
+
+        public float MaxWorkHour
+        {
+            get { return k_MaxWorkHour; }
         }
 
         public override float GetEnergyLeftPrecent()
