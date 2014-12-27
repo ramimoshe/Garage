@@ -18,6 +18,22 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private const bool v_isPossitiveNumberOnly = true;
         private Garage Garage { get; set; }
 
+        /*
+         * -------------------SSSSSSTTTTTUUUUUUBBBBBB
+         * 
+         */
+
+        public void InjectVehicls()
+        {
+            
+            Vehicle car1 = VehicleFactory.GenerateFuelCar("aaa", "1", eCarColor.Blue, eNumOfDoors.Five, "man", 12, 1);
+        }
+
+        /*
+         * 
+         * 
+         */
+
         public GarageConsoleUi()
         {
             Garage = new Garage();

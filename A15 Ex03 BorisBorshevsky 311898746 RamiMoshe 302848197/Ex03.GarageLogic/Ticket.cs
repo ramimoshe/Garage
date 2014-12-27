@@ -19,6 +19,8 @@ namespace Ex03.GarageLogic
         {
             r_Vehicle = i_Vehicle;
             CarState = eVehicleState.Amendment;
+            r_CarOwnerName = i_CarOwnerName;
+            r_CarOwnerPhone = i_CarOwnerPhone;
         }
 
         public override string ToString()
