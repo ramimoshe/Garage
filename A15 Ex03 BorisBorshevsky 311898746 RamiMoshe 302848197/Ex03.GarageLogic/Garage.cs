@@ -40,7 +40,7 @@ namespace Ex03.GarageLogic
             List<string> serialNumbers = new List<string>();
             foreach (var ticket in Tickets)
             {
-                if (ticket.Value.CarState == i_VehicleState)
+                if ((ticket.Value.CarState & i_VehicleState) == ticket.Value.CarState)
                 {
                     serialNumbers.Add(ticket.Key);
                 }

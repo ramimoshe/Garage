@@ -37,9 +37,9 @@ namespace Ex03.GarageLogic
     [Flags]
     public enum eVehicleState
     {
-        Amendment,
-        Fixed,
-        Payed
+        Amendment = 1 << 0,
+        Fixed = 1 << 1,
+        Payed = 1 << 2
     }
 
     public enum eVehicleType
