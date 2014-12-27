@@ -43,23 +43,23 @@ namespace Ex03.GarageLogic
             report.AppendLine("Vehicle Tires Information: ");
             foreach (var tire in Vehicle.Tires)
             {
-                report.Append(" Manufacturer Name: ");
+                report.Append("     Manufacturer Name: ");
                 report.AppendLine(tire.ManufacturerName);
-                report.Append(" Current Air Pressure: ");
+                report.Append("     Current Air Pressure: ");
                 report.AppendLine(tire.CurrentAirPressure.ToString());
             }
 
             report.AppendLine("Vehicle Energy: ");
-            report.Append(" Energy Left Precent: ");
+            report.Append("     Energy Left Precent: ");
             report.AppendLine(Vehicle.GetEnergyLeftPrecent().ToString());
-            report.Append(" Energy Type: ");
+            report.Append("     Energy Type: ");
             if (IsElectricVehicle(Vehicle))
             {
-                report.AppendLine(" Electric");
+                report.AppendLine("     Electric");
             }
             else
             {
-                report.Append(" Fuel - ");
+                report.Append("     Fuel - ");
                 string fuelType = GetVehicleFuelType(Vehicle).Value.ToString();
                 report.AppendLine(fuelType);
             }
