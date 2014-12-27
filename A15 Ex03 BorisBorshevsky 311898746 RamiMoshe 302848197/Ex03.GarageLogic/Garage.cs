@@ -34,12 +34,12 @@ namespace Ex03.GarageLogic
             return Tickets.ContainsKey(i_SerialNumber);
         }
 
-        public List<string> GetGarageTickets()
+        public List<string> GetSerialNumbersInGarage()
         {
-            return GetGarageTickets(eVehicleState.Amendment | eVehicleState.Fixed | eVehicleState.Payed);
+            return GetSerialNumbersInGarage(eVehicleState.Amendment | eVehicleState.Fixed | eVehicleState.Payed);
         }
 
-        public List<string> GetGarageTickets(eVehicleState i_VehicleState)
+        public List<string> GetSerialNumbersInGarage(eVehicleState i_VehicleState)
         {
             List<string> serialNumbers = new List<string>();
             foreach (var ticket in Tickets)
@@ -77,70 +77,15 @@ namespace Ex03.GarageLogic
 
         public string GetCarReport(string i_serialNumber)
         {
-            StringBuilder report = new StringBuilder();
-
+            string report = String.Empty;
             if (IsVehicleExists(i_serialNumber))
             {
-                Ticket ticket = Tickets["i_serialNumber"];
-
-                report.Append("Serial Number: ");
-                report.AppendLine(i_serialNumber);
-
-                report.Append("Model Name: ");
-                report.AppendLine(ticket.Vehicle.ModelName);
-
-                report.Append("Owner Name: ");
-                report.AppendLine(ticket.CarOwnerName);
-
-                report.Append("Owner Phone: ");
-                report.AppendLine(ticket.CarOwnerPhone);
-
-                report.Append("Vehicle State: ");
-                report.AppendLine(ticket.CarState.ToString());
-
-                report.AppendLine("Vehicle Tires Information: ");
-                foreach (var tire in ticket.Vehicle.Tires)
-                {
-                    report.Append(" Manufacturer Name: ");
-                    report.AppendLine(tire.ManufacturerName);
-                    report.Append(" Current Air Pressure: ");
-                    report.AppendLine(tire.CurrentAirPressure.ToString());    
-                }
-
-                report.AppendLine("Vehicle Energy: ");
-                report.Append(" Energy Left Precent: ");
-                report.AppendLine(ticket.Vehicle.GetEnergyLeftPrecent().ToString());
-                report.Append(" Energy Type: ");
-                if (IsElectricVehicle(ticket.Vehicle))
-                {
-                    report.Append(" Electric");
-                }
-                else
-                {
-                    report.Append(" Fuel - ");
-                    //report.Append();
-                }
-                report.AppendLine(ticket.Vehicle.GetEnergyLeftPrecent().ToString());
+                report = Tickets[i_serialNumber].ToString();
             }
 
-            return report.ToString();
+            return report;
         }
 
-        private bool IsElectricVehicle(Vehicle i_Vehicle)
-        {
-            return i_Vehicle.Engine is ElectricEngine;
-        }
-
-        private bool GetVehicleFuelType(Vehicle i_Vehicle)
-        {
-            eFuelType fuelType;
-            FuelEngine fuelEngine = i_Vehicle.Engine as FuelEngine;
-            if (fuelEngine != null)
-            {
-                //fuelType = fuelEngine.FillEnergy();
-            }
-
-            return true;
-        }
+        
     }
 }

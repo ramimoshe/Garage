@@ -53,7 +53,7 @@ namespace Ex03.GarageLogic.VehicleElements
 
         public float CurrentFuelAmount { get; private set; }
 
-        private eFuelType FuelType
+        public eFuelType FuelType
         {
             get { return r_FuelType; }
         }

@@ -43,7 +43,7 @@ namespace Ex03.GarageLogic
         public static Motorcycle GenerateElectricMorotcycle(string i_ModelName, string i_SerialNumber, eMotorcycleLicenseType i_LicenseType, int i_EngineCc, string i_ManufacturerTireName, float i_CurrentTireAirPressure, float i_WorkHoursRemining)
         {
             List<Tire> tires = createTires(2, 30, i_ManufacturerTireName, i_CurrentTireAirPressure);
-            ElectricEngine engine = new ElectricEngine(i_WorkHoursRemining, k_MaxElectricPowerCar);
+            ElectricEngine engine = new ElectricEngine(i_WorkHoursRemining, k_MaxElectricPowerMotorcycle);
 
             return new Motorcycle(i_ModelName, i_SerialNumber, tires, i_LicenseType, i_EngineCc, engine);
         }
@@ -51,7 +51,7 @@ namespace Ex03.GarageLogic
         public static Truck GenerateTruck(string i_ModelName, string i_SerialNumber, float i_MaxCargoWeightAllowed, float i_CurrentCargoWeight, string i_ManufacturerTireName, float i_CurrentTireAirPressure, float i_CurrentFuelAmount)
         {
             List<Tire> tires = createTires(8, 24, i_ManufacturerTireName, i_CurrentTireAirPressure);
-            FuelEngine engine = new FuelEngine(eFuelType.Octan95, i_CurrentFuelAmount, k_MaxFuelMotorcycle);
+            FuelEngine engine = new FuelEngine(eFuelType.Octan95, i_CurrentFuelAmount, k_MaxFuelTruck);
             Truck truck = new Truck(i_ModelName, i_SerialNumber, tires, i_MaxCargoWeightAllowed, engine);
             truck.CurrentCargoWeight = i_CurrentCargoWeight;
 
