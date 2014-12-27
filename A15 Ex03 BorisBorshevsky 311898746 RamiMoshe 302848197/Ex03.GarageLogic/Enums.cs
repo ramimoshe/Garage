@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+
+namespace Ex03.GarageLogic
 {
     public enum eMotorcycleLicenseType
     {
@@ -32,6 +34,7 @@
         Octan98 = 4
     }
 
+    [Flags]
     public enum eVehicleState
     {
         Amendment,

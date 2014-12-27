@@ -12,8 +12,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             {
                Console.WriteLine(getIntFromUser());
             }
-            
-            
+         
             new GarageConsoleUi().Start();
         }
 

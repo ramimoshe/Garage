@@ -2,7 +2,7 @@
 using System;
 namespace Ex03.GarageLogic.VehicleElements
 {
-    public class ElectricEngine
+    public class ElectricEngine : Engine
     {
         private const float k_minimumWorkHoursRemining = 0f;
 
@@ -42,5 +42,13 @@ namespace Ex03.GarageLogic.VehicleElements
             private set { m_WorkHoursRemining = value; }
         }
 
+        public override void FillEnergy(Engery i_Energy)
+        {
+            if (i_Energy is FuelEnergy)
+            {
+                ElectricEnergy energy = (ElectricEnergy)i_Energy;
+                Charge(energy.Amount);
+            }
+        }
     }
 }
