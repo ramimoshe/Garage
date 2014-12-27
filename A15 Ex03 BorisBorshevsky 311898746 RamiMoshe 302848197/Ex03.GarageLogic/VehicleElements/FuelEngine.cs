@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic.VehicleElements
             if (fuelEnergy != null)
             {
                 FuelEnergy energy = fuelEnergy;
-                Fuel(energy.Amount, energy.FuelType);
+                fuel(energy.Amount, energy.FuelType);
             }
         }
 
