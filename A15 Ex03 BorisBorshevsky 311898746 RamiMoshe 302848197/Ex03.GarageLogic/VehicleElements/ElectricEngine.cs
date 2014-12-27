@@ -38,11 +38,12 @@ namespace Ex03.GarageLogic.VehicleElements
             WorkHoursRemining += i_Amount;
         }
 
-        public override void FillEnergy(Engery i_Energy)
+        public override void FillEnergy(Energy i_Energy)
         {
-            if (i_Energy is FuelEnergy)
+            ElectricEnergy electricEnergy = i_Energy as ElectricEnergy;
+            if (electricEnergy != null)
             {
-                ElectricEnergy energy = (ElectricEnergy)i_Energy;
+                ElectricEnergy energy = electricEnergy;
                 Charge(energy.Amount);
             }
         }

@@ -56,9 +56,11 @@ namespace Ex03.GarageLogic
         {
             List<Tire> tires = createTires(k_TiresAmountTruck, k_MaxManufacturerAirPressureTruck, i_ManufacturerTireName, i_CurrentTireAirPressure);
             FuelEngine engine = new FuelEngine(eFuelType.Octan95, i_CurrentFuelAmount, k_MaxFuelTruck);
-            Truck truck = new Truck(i_ModelName, i_LicencePlate, tires, i_MaxCargoWeightAllowed, engine);
-            truck.CurrentCargoWeight = i_CurrentCargoWeight;
-            truck.IsContainsDangerusMatirial = i_IsCarryngDangerousMaterials;
+            Truck truck = new Truck(i_ModelName, i_LicencePlate, tires, i_MaxCargoWeightAllowed, engine)
+            {
+                CurrentCargoWeight = i_CurrentCargoWeight,
+                IsContainsDangerusMatirial = i_IsCarryngDangerousMaterials
+            };
 
             return truck;
         }

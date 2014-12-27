@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic;
 using Ex03.GarageLogic.Exceptions;
@@ -9,7 +8,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 {
     class GarageConsoleUi
     {
-        private const bool v_isPossitiveNumberOnly = true;
+        private const bool v_IsPossitiveNumberOnly = true;
 
         private Garage Garage { get; set; }
 
@@ -109,11 +108,11 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return optionFromUser;
         }
 
-        private int getIntFromUser(bool i_isPossitiveOnly)
+        private int getIntFromUser(bool i_IsPossitiveOnly)
         {
             int optionFromUser;
 
-            while (!int.TryParse(Console.ReadLine(), out optionFromUser) || (optionFromUser < 0 || !i_isPossitiveOnly))
+            while (!int.TryParse(Console.ReadLine(), out optionFromUser) || (optionFromUser < 0 || !i_IsPossitiveOnly))
             {
                 Console.WriteLine("Invalid input, Please enter a positive number only.");
             }
@@ -148,7 +147,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                 Console.WriteLine("Your car isn't in the garage. Please enter your car's details in order to instert is.");
                 Console.WriteLine();
 
-                InsertNewVehicleToGarage(licensePlate);
+                insertNewVehicleToGarage(licensePlate);
             }
             else
             {
@@ -162,27 +161,25 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return Console.ReadLine();
         }
 
-        private void InsertNewVehicleToGarage(string i_LicencePlate)
+        private void insertNewVehicleToGarage(string i_LicencePlate)
         {
-            int motorcycleEngineSize;
-            float currentEnergyLeft;
-            float currentFuelAmmount;
-            bool isCarryngDangerousMaterials;
-            float maxCargoWeight;
-            float currentCargoWeight;
-            eCarColor carColor;
-            eNumOfDoors numOfDoors;
-            eMotorcycleLicenseType motorcycleLicenseType;
-            Vehicle vehicle;
-
-            eVehicleType vehicleType = getVehicleTypeFromUser();
-            string ownerPhone = getOwnerPhoneFromUser();
-            string vehicleModel = getVehicleModelFromUser();
-            string wheelsManufaturer = getTireManufactorerFromUser();
-            float currentWheelAirPreasure = getCurrentTireAirPressureFromUser();
-            string ownerName = getOwnerNameFromUser();
             try
             {
+                int motorcycleEngineSize;
+                float currentEnergyLeft;
+                float currentFuelAmmount;
+                eCarColor carColor;
+                eNumOfDoors numOfDoors;
+                eMotorcycleLicenseType motorcycleLicenseType;
+                Vehicle vehicle;
+
+                eVehicleType vehicleType = getVehicleTypeFromUser();
+                string ownerPhone = getOwnerPhoneFromUser();
+                string vehicleModel = getVehicleModelFromUser();
+                string wheelsManufaturer = getTireManufactorerFromUser();
+                float currentWheelAirPreasure = getCurrentTireAirPressureFromUser();
+                string ownerName = getOwnerNameFromUser();
+            
                 switch (vehicleType)
                 {
                     case eVehicleType.FuelMorotcycle:
@@ -214,9 +211,9 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                         break;
 
                     case eVehicleType.Truck:
-                        isCarryngDangerousMaterials = getIsCarryingDangerousMaterialsFromUser();
-                        maxCargoWeight = getMaxCargoCargoWeightFromUser();
-                        currentCargoWeight = getCurrentCargoCargoWeightFromUser();
+                        var isCarryngDangerousMaterials = getIsCarryingDangerousMaterialsFromUser();
+                        var maxCargoWeight = getMaxCargoCargoWeightFromUser();
+                        var currentCargoWeight = getCurrentCargoCargoWeightFromUser();
                         currentFuelAmmount = getCurrentFuelAmountFromUser();
                         vehicle = VehicleFactory.GenerateTruck(vehicleModel, i_LicencePlate, maxCargoWeight, currentCargoWeight, wheelsManufaturer, currentWheelAirPreasure, currentFuelAmmount, isCarryngDangerousMaterials);
                         break;
@@ -255,7 +252,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private float getCurrentTireAirPressureFromUser()
         {
             Console.Write("Please enter your vehicle's wheels current air pressure:  ");
-            return getFloatFromUser(v_isPossitiveNumberOnly);
+            return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
         private static string getTireManufactorerFromUser()
@@ -273,13 +270,13 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private float getCurrentEnergyLeftFromUser()
         {
             Console.WriteLine("How many hours left in your Engine's battary?");
-            return getFloatFromUser(v_isPossitiveNumberOnly);
+            return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
         private float getCurrentFuelAmountFromUser()
         {
             Console.WriteLine("How much fuel do you have? (Liters)");
-            return getFloatFromUser(v_isPossitiveNumberOnly);
+            return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
         private bool getIsCarryingDangerousMaterialsFromUser()
@@ -291,13 +288,13 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private float getCurrentCargoCargoWeightFromUser()
         {
             Console.WriteLine("What is your current cargo weight?");
-            return getFloatFromUser(v_isPossitiveNumberOnly);
+            return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
         private float getMaxCargoCargoWeightFromUser()
         {
             Console.WriteLine("What is your Max cargo weight?");
-            return getFloatFromUser(v_isPossitiveNumberOnly);
+            return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
         private eNumOfDoors getNumOfDoorsFromUser()
@@ -355,7 +352,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private int getMotorcycleCcFromUser()
         {
             Console.WriteLine("What is the motorcycle engine size (CC)?");
-            return getIntFromUser(v_isPossitiveNumberOnly);
+            return getIntFromUser(v_IsPossitiveNumberOnly);
         }
 
         private eVehicleType getVehicleTypeFromUser()
@@ -542,7 +539,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             eFuelType fuelType = getFuelTypeFromUser();
 
             Console.WriteLine("Please enter the amount to fuel:");
-            float amountToFuel = getFloatFromUser(v_isPossitiveNumberOnly);
+            float amountToFuel = getFloatFromUser(v_IsPossitiveNumberOnly);
 
             try
             {
@@ -560,11 +557,11 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             }
         }
 
-        private float getFloatFromUser(bool i_isPossitiveOnly)
+        private float getFloatFromUser(bool i_IsPossitiveOnly)
         {
             float optionFromUser;
 
-            while (!float.TryParse(Console.ReadLine(), out optionFromUser) || (optionFromUser < 0 || !i_isPossitiveOnly))
+            while (!float.TryParse(Console.ReadLine(), out optionFromUser) || (optionFromUser < 0 || !i_IsPossitiveOnly))
             {
                 Console.WriteLine("Invalid input, Please choose floating point number only.");
             }
@@ -579,7 +576,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             string licensePlate = getLicensePlateFromUser();
 
             Console.WriteLine("for how many minutes whould you like to charge");
-            float hoursToCharge = getFloatFromUser(v_isPossitiveNumberOnly);
+            float hoursToCharge = getFloatFromUser(v_IsPossitiveNumberOnly);
 
             try
             {

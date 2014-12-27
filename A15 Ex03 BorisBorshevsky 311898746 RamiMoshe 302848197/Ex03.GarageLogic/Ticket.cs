@@ -55,7 +55,7 @@ namespace Ex03.GarageLogic
             report.Append("     Energy Left Precent: ");
             report.AppendLine(Vehicle.GetEnergyLeftPrecent().ToString());
             report.Append("     Energy Type: ");
-            if (IsElectricVehicle(Vehicle))
+            if (isElectricVehicle(Vehicle))
             {
                 report.AppendLine("     Electric");
             }
@@ -69,7 +69,7 @@ namespace Ex03.GarageLogic
             return report.ToString();
         }
 
-        private bool IsElectricVehicle(Vehicle i_Vehicle)
+        private bool isElectricVehicle(Vehicle i_Vehicle)
         {
             return i_Vehicle.Engine is ElectricEngine;
         }

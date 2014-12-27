@@ -1,6 +1,6 @@
 ﻿namespace Ex03.GarageLogic.VehicleElements
 {
-    public class FuelEnergy : Engery
+    public class FuelEnergy : Energy
     {
         public eFuelType FuelType { get; set; }
 

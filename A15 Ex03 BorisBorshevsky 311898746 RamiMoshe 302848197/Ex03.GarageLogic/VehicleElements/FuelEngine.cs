@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic.VehicleElements
             CurrentFuelAmount = i_CurrentFuelAmount;
         }
 
-        private void Fuel(float i_AmountToAdd, eFuelType i_FuelType)
+        private void fuel(float i_AmountToAdd, eFuelType i_FuelType)
         {
             if (i_AmountToAdd < k_MinimumAmountToFuel)
             {
@@ -44,14 +44,14 @@ namespace Ex03.GarageLogic.VehicleElements
             }
 
             CurrentFuelAmount += i_AmountToAdd;
-
         }
 
-        public override void FillEnergy(Engery i_Energy)
+        public override void FillEnergy(Energy i_Energy)
         {
-            if (i_Energy is FuelEnergy)
+            FuelEnergy fuelEnergy = i_Energy as FuelEnergy;
+            if (fuelEnergy != null)
             {
-                FuelEnergy energy = (FuelEnergy) i_Energy;
+                FuelEnergy energy = fuelEnergy;
                 Fuel(energy.Amount, energy.FuelType);
             }
         }

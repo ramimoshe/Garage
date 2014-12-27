@@ -5,10 +5,6 @@ namespace Ex03.GarageLogic.Vehicles
 {
     public class Truck : Vehicle
     {
-        private const int k_TiresCount = 8;
-        private const int k_MaxManufacturerAirPressure = 24;
-        private const float k_MaxFuelAmount = 200;
-
         private readonly float r_MaxCargoWeightAllowed;
 
         public float MaxCargoWeightAllowed { get { return r_MaxCargoWeightAllowed; } }
