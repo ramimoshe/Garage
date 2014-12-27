@@ -9,6 +9,8 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 {
     class GarageConsoleUi
     {
+        private const bool v_isPossitiveNumberOnly = true;
+
         private Garage Garage { get; set; }
 
         /*
@@ -235,8 +237,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                Console.WriteLine("Operation Failed - bad value entered");
                Console.WriteLine(voore.Message);
            }
-            
-
+        
         }
 
         private static string getOwnerPhoneFromUser()
@@ -392,9 +393,6 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return (eCarColor)option;
         }
 
-
-
-
         private void vehicleLicensePlateNumbersMenu()
         {
             const int numOfOptions = 3;
@@ -427,13 +425,15 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private void showAllVechaleLicensePlates()
         {
             int counter = 0;
+            Console.Clear();
+            Console.WriteLine("List of vehicles:");
+            Console.WriteLine("-----------------");
             foreach (string licensePlate in Garage.GetLicencePlatesInGarage())
             {
                 counter++;
                 Console.WriteLine("({0}) {1}.",counter , licensePlate);
             }
         }
-
 
         private void filteredVehicleLicensePlatesMenu()
         {
@@ -501,7 +501,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private void fillAirPresure()
         {
             Console.WriteLine();
-            Console.WriteLine("You are about to fill your vehicle whells:");
+            Console.WriteLine("You are about to fill your vehicle tires:");
             
             string licensePlate = getLicensePlateFromUser();
 
@@ -519,12 +519,14 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 
         private eFuelType getFuelTypeFromUser()
         {
+            const int numOfOptions = 4;
+            
             Console.WriteLine(" (1) Soler.");
             Console.WriteLine(" (2) Octan95.");
             Console.WriteLine(" (3) Octan96.");
             Console.WriteLine(" (4) Octan98.");
 
-            int option = getMenuOptionFromUser(k_numOfFuelTypes);
+            int option = getMenuOptionFromUser(numOfOptions);
                         
             return (eFuelType)option;
         }
@@ -610,6 +612,9 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private void showFilteredListOfLicensePlates(eVehicleState i_FilteredBy)
         {
             int counter = 0;
+            Console.Clear();
+            Console.WriteLine("List of vehicles:");
+            Console.WriteLine("-----------------");
             foreach (string licensePlate in Garage.GetLicencePlatesInGarage(i_FilteredBy))
             {
                 counter++;
