@@ -6,6 +6,6 @@ namespace Ex03.GarageLogic.VehicleElements
 {
     public class ElectricEnergy : Engery
     {
-        public int YY { get; set; }
+        public float Amount { get; set; }
     }
 }

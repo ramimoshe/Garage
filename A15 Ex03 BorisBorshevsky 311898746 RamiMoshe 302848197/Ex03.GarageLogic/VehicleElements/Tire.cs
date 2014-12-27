@@ -3,14 +3,14 @@ using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic.VehicleElements
 {
-    public class Wheel
+    public class Tire
     {
         private const float k_MinimalAmountOfAir = 0f;
 
         private readonly float r_MaxManufacturerAirPressure;
         private readonly string r_ManufacturerName;
 
-        public Wheel(float i_MaxManufacturerAirPressure, string i_ManufacturerName, float i_CurrentAirPressure)
+        public Tire(float i_MaxManufacturerAirPressure, string i_ManufacturerName, float i_CurrentAirPressure)
         {
             r_MaxManufacturerAirPressure = i_MaxManufacturerAirPressure;
             r_ManufacturerName = i_ManufacturerName;

@@ -7,6 +7,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
     {
         static void Main(string[] args)
         {
+            VehicleFactory.GenerateFuelCar("rami", "123", eCarColor.Blue, eNumOfDoors.Five, "asd", 1f, 2f);
             new GarageConsoleUi().Start();
         }
     }

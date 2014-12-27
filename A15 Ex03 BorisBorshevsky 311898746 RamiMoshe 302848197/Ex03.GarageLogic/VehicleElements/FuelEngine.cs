@@ -6,10 +6,8 @@ namespace Ex03.GarageLogic.VehicleElements
     public class FuelEngine : Engine
     {
         private const float k_minimumAmountToFuel = 0f;
-
         private readonly eFuelType r_FuelType;
-        public readonly float r_MaxFuelAmount;
-
+        private readonly float r_MaxFuelAmount;
         private float m_CurrentFuelAmount;
 
         public FuelEngine(eFuelType i_FuelType, float i_CurrentFuelAmount, float i_MaxFuelAmount)
@@ -53,12 +51,18 @@ namespace Ex03.GarageLogic.VehicleElements
             private set { m_CurrentFuelAmount = value; }
         }
 
+        public float MaxFuelAmount
+        {
+            get { return r_MaxFuelAmount; }
+        }
+
         public override void FillEnergy(Engery i_Energy)
         {
-            throw new NotImplementedException();
-            // try cast energy and then fill energy
-
-
+            if (i_Energy is FuelEnergy)
+            {
+                FuelEnergy energy = (FuelEnergy) i_Energy;
+                Fuel(energy.Amount, energy.FuelType);
+            }
         }
     }
 }

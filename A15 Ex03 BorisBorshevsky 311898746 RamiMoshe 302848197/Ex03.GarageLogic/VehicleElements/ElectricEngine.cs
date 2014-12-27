@@ -44,7 +44,11 @@ namespace Ex03.GarageLogic.VehicleElements
 
         public override void FillEnergy(Engery i_Energy)
         {
-            throw new NotImplementedException();
+            if (i_Energy is FuelEnergy)
+            {
+                ElectricEnergy energy = (ElectricEnergy)i_Energy;
+                Charge(energy.Amount);
+            }
         }
     }
 }
