@@ -18,11 +18,13 @@ namespace Ex03.GarageLogic
 
         public void CreateTicket(string i_CarOwnerName, string i_CarOwnerPhone, Vehicle i_Vehicle)
         {
-            if (!IsVehicleExists(i_Vehicle.LicencePlate))
+            if (IsVehicleExists(i_Vehicle.LicencePlate))
             {
-                Ticket ticket = new Ticket(i_CarOwnerName, i_CarOwnerPhone, i_Vehicle);
-                Tickets.Add(i_Vehicle.LicencePlate, ticket);
+                throw new ArgumentException("Vehicle already exists");
             }
+
+            Ticket ticket = new Ticket(i_CarOwnerName, i_CarOwnerPhone, i_Vehicle);
+            Tickets.Add(i_Vehicle.LicencePlate, ticket);
         }
 
         public bool IsVehicleExists(string i_LicencePlate)
@@ -51,35 +53,54 @@ namespace Ex03.GarageLogic
 
         public void UpdateVehicleState(string i_LicencePlate, eVehicleState i_VehicleState)
         {
+            if (!IsVehicleExists(i_LicencePlate))
+            {
+                throw new ArgumentException("Vehicle does not exists");
+            }
+
             Tickets[i_LicencePlate].CarState = i_VehicleState;
         }
 
         public void FillManufacturerAirpressure(string i_LicencePlate)
         {
+            if (!IsVehicleExists(i_LicencePlate))
+            {
+                throw new ArgumentException("Vehicle does not exists");
+            }
+
             Tickets[i_LicencePlate].Vehicle.FillManufacturerAirPressure();
         }
 
         public void FuelVehicle(string i_LicencePlate, eFuelType i_FuelType, float i_AmountCc)
         {
+            if (!IsVehicleExists(i_LicencePlate))
+            {
+                throw new ArgumentException("Vehicle does not exists");
+            }
+
             FuelEnergy fuelEnergy = new FuelEnergy(i_FuelType, i_AmountCc);
             Tickets[i_LicencePlate].Vehicle.Engine.FillEnergy(fuelEnergy);
         }
 
         public void ChargeVehicle(string i_LicencePlate, float i_AmountMinutes)
         {
+            if (!IsVehicleExists(i_LicencePlate))
+            {
+                throw new ArgumentException("Vehicle does not exists");
+            }
+
             ElectricEnergy electricEnergy = new ElectricEnergy(i_AmountMinutes);
             Tickets[i_LicencePlate].Vehicle.Engine.FillEnergy(electricEnergy);
         }
 
         public string GetCarReport(string i_LicencePlate)
         {
-            string report = String.Empty;
-            if (IsVehicleExists(i_LicencePlate))
+            if (!IsVehicleExists(i_LicencePlate))
             {
-                report = Tickets[i_LicencePlate].ToString();
+                throw new ArgumentException("Vehicle does not exists");
             }
 
-            return report;
+            return Tickets[i_LicencePlate].ToString();
         }
     }
 }
