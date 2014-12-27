@@ -43,5 +43,10 @@ namespace Ex03.GarageLogic.VehicleElements
 
             CurrentAirPressure += i_Amount;
         }
+
+        public void FillManufacturerAirPressure()
+        {
+            CurrentAirPressure = MaxManufacturerAirPressure;
+        }
     }
 }

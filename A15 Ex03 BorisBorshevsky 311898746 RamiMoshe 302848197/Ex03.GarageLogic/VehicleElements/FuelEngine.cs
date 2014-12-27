@@ -3,7 +3,7 @@ using System;
 
 namespace Ex03.GarageLogic.VehicleElements
 {
-    public class FuelEngine
+    public class FuelEngine : Engine
     {
         private const float k_minimumAmountToFuel = 0f;
 
@@ -51,6 +51,14 @@ namespace Ex03.GarageLogic.VehicleElements
         public float CurrentFuelAmount {
             get { return m_CurrentFuelAmount; }
             private set { m_CurrentFuelAmount = value; }
+        }
+
+        public override void FillEnergy(Engery i_Energy)
+        {
+            throw new NotImplementedException();
+            // try cast energy and then fill energy
+
+
         }
     }
 }

@@ -17,9 +17,16 @@ namespace Ex03.GarageLogic.Vehicles
 
         public string SerialNumber { get; private set; }
 
-        public abstract float GetEnergyLeftPrecent();
-
         protected List<Wheel> Wheels  { get; set; }
 
+        public abstract float GetEnergyLeftPrecent();
+
+        public void FillManufacturerAirPressure()
+        {
+            foreach (Wheel wheel in Wheels)
+            {
+                wheel.FillManufacturerAirPressure();
+            }   
+        }
     }
 }
