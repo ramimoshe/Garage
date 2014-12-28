@@ -1,4 +1,5 @@
-﻿using Ex03.GarageLogic.Exceptions;
+﻿using Ex03.GarageLogic.EnergyRepo;
+using Ex03.GarageLogic.Exceptions;
 using System;
 
 namespace Ex03.GarageLogic.VehicleElements
@@ -16,7 +17,7 @@ namespace Ex03.GarageLogic.VehicleElements
         {
             if (i_WorkHoursRemining > i_MaxWorkHour)
             {
-                throw new ValueOutOfRangeException("Cant fill electric more then the maximum work hour", k_MinimumWorkHoursRemining, i_MaxWorkHour);    
+                throw new ValueOutOfRangeException("Can't fill more elextricity than maximum", k_MinimumWorkHoursRemining, i_MaxWorkHour);    
             }
 
             WorkHoursRemining = i_WorkHoursRemining;
@@ -32,7 +33,7 @@ namespace Ex03.GarageLogic.VehicleElements
 
             if (i_Amount + WorkHoursRemining > r_MaxWorkHour)
             {
-                throw new ValueOutOfRangeException("Cant fill air more then the maximum electric", 0, r_MaxWorkHour);
+                throw new ValueOutOfRangeException("Cant fill air more then the maximum electric", k_MinimumWorkHoursRemining, r_MaxWorkHour);
             }
 
             WorkHoursRemining += i_Amount;

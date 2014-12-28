@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Ex03.GarageLogic.VehicleElements;
 using Ex03.GarageLogic.Vehicles;
+using Ex03.GarageLogic.EnergyRepo;
 
 namespace Ex03.GarageLogic
 {
@@ -42,7 +43,7 @@ namespace Ex03.GarageLogic
             List<string> serialNumbers = new List<string>();
             foreach (var ticket in Tickets)
             {
-                if ((ticket.Value.CarState & i_VehicleState) == ticket.Value.CarState)
+                if ((ticket.Value.VehicleState & i_VehicleState) == ticket.Value.VehicleState)
                 {
                     serialNumbers.Add(ticket.Key);
                 }
@@ -58,7 +59,7 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Vehicle does not exists");
             }
 
-            Tickets[i_LicencePlate].CarState = i_VehicleState;
+            Tickets[i_LicencePlate].VehicleState = i_VehicleState;
         }
 
         public void FillManufacturerAirpressure(string i_LicencePlate)
@@ -77,7 +78,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Vehicle does not exists");
             }
-
+            // TODO: throw exeption when you try to fuel electric vehicle 
             FuelEnergy fuelEnergy = new FuelEnergy(i_FuelType, i_AmountCc);
             Tickets[i_LicencePlate].Vehicle.Engine.FillEnergy(fuelEnergy);
         }
@@ -88,7 +89,7 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Vehicle does not exists");
             }
-
+            // TODO: throw exeption when you try to charge fuel vehicle 
             ElectricEnergy electricEnergy = new ElectricEnergy(i_AmountMinutes);
             Tickets[i_LicencePlate].Vehicle.Engine.FillEnergy(electricEnergy);
         }

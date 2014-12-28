@@ -30,10 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="VehicleElements\Energy.cs" />
+    <Compile Include="Energy\Energy.cs" />
     <Compile Include="VehicleElements\Engine.cs" />
-    <Compile Include="VehicleElements\ElectricEnergy.cs" />
-    <Compile Include="VehicleElements\FuelEnergy.cs" />
+    <Compile Include="Energy\ElectricEnergy.cs" />
+    <Compile Include="Energy\FuelEnergy.cs" />
     <Compile Include="Vehicles\Car.cs" />
     <Compile Include="VehicleElements\ElectricEngine.cs" />
     <Compile Include="Enums.cs" />

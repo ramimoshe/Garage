@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic.Vehicles
         public Truck(string i_ModelName, string i_LicencePlate, List<Tire> i_Tires, float i_MaxCargoWeightAllowed, Engine i_Engine)
             : base(i_ModelName, i_LicencePlate, i_Tires, i_Engine)
         {
+            //Todo: Throw exeption if current cargo above max cargo
             r_MaxCargoWeightAllowed = i_MaxCargoWeightAllowed;
         }
 

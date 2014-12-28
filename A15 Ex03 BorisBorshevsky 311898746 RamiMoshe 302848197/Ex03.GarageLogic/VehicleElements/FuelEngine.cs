@@ -1,4 +1,5 @@
-﻿using Ex03.GarageLogic.Exceptions;
+﻿using Ex03.GarageLogic.EnergyRepo;
+using Ex03.GarageLogic.Exceptions;
 using System;
 
 namespace Ex03.GarageLogic.VehicleElements

@@ -6,21 +6,22 @@ namespace Ex03.GarageLogic
 {
     public class Ticket
     {
-        private readonly string r_CarOwnerName;
-        private readonly string r_CarOwnerPhone;
+        private const eVehicleState k_DefaultVehicleState = eVehicleState.Amendment;
+        private readonly string r_VehicleOwnerName;
+        private readonly string r_VehicleOwnerPhone;
         private readonly Vehicle r_Vehicle;
 
-        public string CarOwnerName { get { return r_CarOwnerName; } }
-        public string CarOwnerPhone { get { return r_CarOwnerPhone; } }
+        public string CarOwnerName { get { return r_VehicleOwnerName; } }
+        public string CarOwnerPhone { get { return r_VehicleOwnerPhone; } }
         public Vehicle Vehicle { get { return r_Vehicle; } }
-        public eVehicleState CarState { get; set; }
+        public eVehicleState VehicleState { get; set; }
 
         public Ticket(string i_CarOwnerName, string i_CarOwnerPhone, Vehicle i_Vehicle)
         {
             r_Vehicle = i_Vehicle;
-            CarState = eVehicleState.Amendment;
-            r_CarOwnerName = i_CarOwnerName;
-            r_CarOwnerPhone = i_CarOwnerPhone;
+            VehicleState = k_DefaultVehicleState;
+            r_VehicleOwnerName = i_CarOwnerName;
+            r_VehicleOwnerPhone = i_CarOwnerPhone;
         }
 
         public override string ToString()
@@ -40,19 +41,23 @@ namespace Ex03.GarageLogic
             report.AppendLine(CarOwnerPhone);
 
             report.Append("Vehicle State: ");
-            report.AppendLine(CarState.ToString());
+            report.AppendLine(VehicleState.ToString());
 
             report.AppendLine("Vehicle Tires Information: ");
+            //TODO: Num Of wheels
             foreach (var tire in Vehicle.Tires)
             {
                 report.Append("     Manufacturer Name: ");
                 report.AppendLine(tire.ManufacturerName);
                 report.Append("     Current Air Pressure: ");
                 report.AppendLine(tire.CurrentAirPressure.ToString());
+                //TODO: Max Air Pressure
             }
 
             report.AppendLine("Vehicle Energy: ");
             report.Append("     Energy Left Precent: ");
+            
+            //TODO: make this precent and not 0.54156385764
             report.AppendLine(Vehicle.GetEnergyLeftPrecent().ToString());
             report.Append("     Energy Type: ");
             if (isElectricVehicle(Vehicle))
@@ -65,6 +70,21 @@ namespace Ex03.GarageLogic
                 string fuelType = GetVehicleFuelType(Vehicle).Value.ToString();
                 report.AppendLine(fuelType);
             }
+
+
+            //TODO: Motorcycly License type
+            //TODO: Motorcycly engine cc
+            //TODO: color
+            //TODO: num of doors
+            //TODO: current cargo weight
+            //TODO: max cargo weight
+            //TODO: dangerous materials
+            //TODO: Current amount of fuel
+            //TODO: Max amount of fuel
+            //TODO: Current amount of Electricity
+            //TODO: Max amount of max amount of electricity
+
+
 
             return report.ToString();
         }

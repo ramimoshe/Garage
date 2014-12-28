@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic.VehicleElements
 
         public Tire(float i_MaxManufacturerAirPressure, string i_ManufacturerName, float i_CurrentAirPressure)
         {
+            // TODO: throw exeption if initial air pressure above max
             r_MaxManufacturerAirPressure = i_MaxManufacturerAirPressure;
             r_ManufacturerName = i_ManufacturerName;
             CurrentAirPressure = i_CurrentAirPressure;
@@ -23,6 +24,8 @@ namespace Ex03.GarageLogic.VehicleElements
 
         public void AddAdir(float i_Amount)
         {
+            //TODO: use this method instead FillManufacturerAirPressure()
+            
             if (i_Amount < k_MinimalAmountOfAir)
             {
                 throw new ArgumentException("Cant add less than " + k_MinimalAmountOfAir.ToString() + " air");
@@ -36,6 +39,7 @@ namespace Ex03.GarageLogic.VehicleElements
             CurrentAirPressure += i_Amount;
         }
 
+        //TODO: Delete this function
         public void FillManufacturerAirPressure()
         {
             CurrentAirPressure = MaxManufacturerAirPressure;

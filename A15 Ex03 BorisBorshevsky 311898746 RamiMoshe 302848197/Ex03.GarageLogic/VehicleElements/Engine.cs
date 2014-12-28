@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic.VehicleElements
+﻿using Ex03.GarageLogic.EnergyRepo;
+
+namespace Ex03.GarageLogic.VehicleElements
 {
     public abstract class Engine
     {
