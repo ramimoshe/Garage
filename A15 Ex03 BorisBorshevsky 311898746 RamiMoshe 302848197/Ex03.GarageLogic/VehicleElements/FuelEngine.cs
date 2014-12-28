@@ -1,4 +1,4 @@
-﻿using Ex03.GarageLogic.EnergyRepo;
+﻿using Ex03.GarageLogic.Energy;
 using Ex03.GarageLogic.Exceptions;
 using System;
 
@@ -47,14 +47,16 @@ namespace Ex03.GarageLogic.VehicleElements
             CurrentFuelAmount += i_AmountToAdd;
         }
 
-        public override void FillEnergy(Energy i_Energy)
+        public override void FillEnergy(BaseEnergy i_Energy)
         {
             FuelEnergy fuelEnergy = i_Energy as FuelEnergy;
-            if (fuelEnergy != null)
+            if (fuelEnergy == null)
             {
-                FuelEnergy energy = fuelEnergy;
-                fuel(energy.Amount, energy.FuelType);
+                throw new ArgumentException("Invalid type of energy");
             }
+            
+            FuelEnergy energy = fuelEnergy;
+            fuel(energy.Amount, energy.FuelType);
         }
 
         public override float GetEnergyLeftPrecent()

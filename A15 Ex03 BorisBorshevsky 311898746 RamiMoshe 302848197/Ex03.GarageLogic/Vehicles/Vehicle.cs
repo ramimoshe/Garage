@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Ex03.GarageLogic.Energy;
 using Ex03.GarageLogic.VehicleElements;
 
 namespace Ex03.GarageLogic.Vehicles
@@ -27,11 +28,16 @@ namespace Ex03.GarageLogic.Vehicles
 
         public abstract float GetEnergyLeftPrecent();
 
+        public virtual void FillEnergy(BaseEnergy i_Energy)
+        {
+            Engine.FillEnergy(i_Energy);
+        }
+
         public void FillManufacturerAirPressure()
         {
             foreach (Tire wheel in Tires)
             {
-                wheel.FillManufacturerAirPressure();
+                wheel.AddAdir(wheel.MaxManufacturerAirPressure);
             }   
         }
     }

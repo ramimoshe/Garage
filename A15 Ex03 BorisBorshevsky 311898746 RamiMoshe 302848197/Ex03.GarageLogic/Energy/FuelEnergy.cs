@@ -1,6 +1,6 @@
-﻿namespace Ex03.GarageLogic.EnergyRepo
+﻿namespace Ex03.GarageLogic.Energy
 {
-    public class FuelEnergy : Energy
+    public class FuelEnergy : BaseEnergy
     {
         public eFuelType FuelType { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using Ex03.GarageLogic.EnergyRepo;
+﻿using Ex03.GarageLogic.Energy;
 using Ex03.GarageLogic.Exceptions;
 using System;
 
@@ -39,14 +39,16 @@ namespace Ex03.GarageLogic.VehicleElements
             WorkHoursRemining += i_Amount;
         }
 
-        public override void FillEnergy(Energy i_Energy)
+        public override void FillEnergy(BaseEnergy i_Energy)
         {
             ElectricEnergy electricEnergy = i_Energy as ElectricEnergy;
-            if (electricEnergy != null)
+            if (electricEnergy == null)
             {
-                ElectricEnergy energy = electricEnergy;
-                Charge(energy.Amount);
+                throw new ArgumentException("Invalid type of energy");
             }
+
+            ElectricEnergy energy = electricEnergy;
+            Charge(energy.Amount);
         }
 
         public override float GetEnergyLeftPrecent()

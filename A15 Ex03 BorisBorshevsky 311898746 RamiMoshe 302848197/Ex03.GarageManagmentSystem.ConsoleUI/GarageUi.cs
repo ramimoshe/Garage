@@ -27,7 +27,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             Vehicle car5 = VehicleFactory.GenerateElectricCar("AR", "E2", eCarColor.White, eNumOfDoors.Three, "Mish", 22f, 1.2f);
             Vehicle car6 = VehicleFactory.GenerateElectricMorotcycle("ElMotor", "E3", eMotorcycleLicenseType.A, 100, "misg", 12f, 1f);
             Vehicle car7 = VehicleFactory.GenerateFuelMorotcycle("ElMotor", "F4", eMotorcycleLicenseType.A, 100, "misg", 12f, 1f);
-            Vehicle car8 = VehicleFactory.GenerateTruck("hitachi", "T1", 100f, 80f, "mishlen", 40f, 50f, true);
+            Vehicle car8 = VehicleFactory.GenerateTruck("hitachi", "T1", 100f, 80f, "mishlen", 20f, 50f, true);
 
             Garage.CreateTicket("Boris", "050111111", car1);
             Garage.CreateTicket("David", "050222222", car2);
@@ -131,7 +131,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                         Console.WriteLine("Invalid input, Please choose number between 1 to {0} only.", i_NumOfOptions);
                     }
                 }
-                catch (FormatException fe)
+                catch (FormatException)
                 {
                     Console.WriteLine("Bad input, Please use integers only");
                 }
@@ -140,7 +140,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return optionFromUser;
         }
 
-
+        //TODO: Should remove it i think (0 references)
         private int getMenuOptionFromUserWithTryParse(int i_NumOfOptions)
         {
             int optionFromUser;

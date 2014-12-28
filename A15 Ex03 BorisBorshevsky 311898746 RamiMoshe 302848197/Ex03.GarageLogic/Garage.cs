@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Ex03.GarageLogic.VehicleElements;
 using Ex03.GarageLogic.Vehicles;
-using Ex03.GarageLogic.EnergyRepo;
+using Ex03.GarageLogic.Energy;
 
 namespace Ex03.GarageLogic
 {
@@ -78,9 +77,10 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Vehicle does not exists");
             }
-            // TODO: throw exeption when you try to fuel electric vehicle 
+
+            // TODO: throw exeption when you try to fuel electric vehicle <DONE>
             FuelEnergy fuelEnergy = new FuelEnergy(i_FuelType, i_AmountCc);
-            Tickets[i_LicencePlate].Vehicle.Engine.FillEnergy(fuelEnergy);
+            Tickets[i_LicencePlate].Vehicle.FillEnergy(fuelEnergy);
         }
 
         public void ChargeVehicle(string i_LicencePlate, float i_AmountMinutes)
@@ -89,9 +89,10 @@ namespace Ex03.GarageLogic
             {
                 throw new ArgumentException("Vehicle does not exists");
             }
-            // TODO: throw exeption when you try to charge fuel vehicle 
+
+            // TODO: throw exeption when you try to charge fuel vehicle <DONE>
             ElectricEnergy electricEnergy = new ElectricEnergy(i_AmountMinutes);
-            Tickets[i_LicencePlate].Vehicle.Engine.FillEnergy(electricEnergy);
+            Tickets[i_LicencePlate].Vehicle.FillEnergy(electricEnergy);
         }
 
         public string GetCarReport(string i_LicencePlate)
