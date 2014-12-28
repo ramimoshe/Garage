@@ -62,37 +62,37 @@ namespace Ex03.GarageLogic
             }
 
             report.AppendLine("Vehicle Energy: ");
-            report.Append("     Energy Left Precent: ");
-            //TODO: make this precent and not 0.54156385764 <DONE>
-            report.AppendLine(Vehicle.GetEnergyLeftPrecent().ToString("P"));
-
-            report.Append("     Energy Type: ");
             if (isElectricVehicle(Vehicle))
             {
-                report.AppendLine("     Electric");
-            }
-            else
-            {
-                report.Append("     Fuel - ");
-                string fuelType = getVehicleFuelType(Vehicle).Value.ToString();
-                report.AppendLine(fuelType);
-            }
+                report.AppendLine("     Energy Type: Electric");
 
-            //TODO: Max amount of fuel <DONE>
-            //TODO: Max amount of max amount of electricity <DONE>
-            report.Append("     Max Energy: ");
-            if (isElectricVehicle(Vehicle))
-            {
+                report.Append("     Max Energy: "); //TODO: Max amount of fuel <DONE>
                 ElectricEngine electricEngine = Vehicle.Engine as ElectricEngine;
                 report.Append(electricEngine.MaxWorkHour.ToString());
+                report.AppendLine(" hours");
+
+                report.Append("     Current Amount: "); //TODO: Current amount of Electricity <DONE>
+                report.Append((Vehicle.Engine as ElectricEngine).WorkHoursRemining);
                 report.AppendLine(" hours");
             }
             else
             {
+                report.Append("     Energy Type: Fuel - ");
+                string fuelType = getVehicleFuelType(Vehicle).Value.ToString();
+                report.AppendLine(fuelType);
+
+                report.Append("     Max Energy: "); //TODO: Max amount of max amount of electricity <DONE>
                 FuelEngine fuelEngine = Vehicle.Engine as FuelEngine;
                 report.Append(fuelEngine.MaxFuelAmount.ToString());
                 report.AppendLine(" liters");
+
+                report.Append("     Current Amount: "); //TODO: Current amount of fuel <DONE>
+                report.Append((Vehicle.Engine as FuelEngine).CurrentFuelAmount);
+                report.AppendLine(" liters");
             }
+            report.Append("     Energy Left Precent: ");
+            //TODO: make this precent and not 0.54156385764 <DONE>
+            report.AppendLine(Vehicle.GetEnergyLeftPrecent().ToString("P"));
 
             //TODO: color <DONE>
             //TODO: num of doors <DONE>
@@ -122,17 +122,14 @@ namespace Ex03.GarageLogic
             Truck truck = Vehicle as Truck;
             if (truck != null)
             {
-                report.Append("Current Cargo Weight: ");
-                report.AppendLine(truck.CurrentCargoWeight.ToString());
                 report.Append("Max Cargo Weight: ");
                 report.AppendLine(truck.MaxCargoWeightAllowed.ToString());
+                report.Append("Current Cargo Weight: ");
+                report.AppendLine(truck.CurrentCargoWeight.ToString());
                 report.Append("Contain Dangerous Materials: ");
                 report.AppendLine(truck.IsContainsDangerusMatirial.ToString());
             }
             
-            //TODO: Current amount of fuel <??> Implement in line 68???
-            //TODO: Current amount of Electricity <Why> GetEnergyLeftPrecent is not enougth?
-   
             return report.ToString();
         }
 

@@ -140,7 +140,6 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return optionFromUser;
         }
 
-        //TODO: Should remove it i think (0 references)
         private int getMenuOptionFromUserWithTryParse(int i_NumOfOptions)
         {
             int optionFromUser;

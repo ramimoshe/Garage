@@ -12,19 +12,16 @@ namespace Ex03.GarageLogic
         private const float k_CarMaxFuel = 45f;
         private const float k_CarMaxElectricPower = 2.6f;
 
-
         private const int k_MotorcycleTiresAmount = 2;
         private const float k_MotorcycleMaxFuel = 6.5f;
         private const eFuelType k_MotorcycleFuelType = eFuelType.Octan96;
         private const int k_MotorcycleMaxManufacturerAirPressure = 30;
         private const float k_MotorcycleMaxElectricPower = 1.8f;
 
-
         private const int k_TruckTiresAmount = 8;
         private const float k_TruckMaxFuel = 200f;
         private const int k_TruckMaxManufacturerAirPressure = 24;
         private const eFuelType k_TruckFuelType = eFuelType.Soler;
-
 
         public static Car GenerateFuelCar(string i_ModelName, string i_LicencePlate, eCarColor i_CarColor, eNumOfDoors i_Doors, string i_ManufacturerTireName, float i_CurrentTireAirPressure, float i_CurrentFuelAmount)
         {
