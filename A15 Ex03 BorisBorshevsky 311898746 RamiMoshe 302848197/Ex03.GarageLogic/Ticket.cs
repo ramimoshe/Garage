@@ -47,7 +47,6 @@ namespace Ex03.GarageLogic
             report.AppendLine(VehicleState.ToString());
 
             report.AppendLine("Vehicle Tires Information: ");
-            //TODO: Num Of wheels <DONE>
             report.Append("     Number Of Wheels: ");
             report.AppendLine(Vehicle.Tires.Count.ToString());
             foreach (var tire in Vehicle.Tires)
@@ -58,7 +57,6 @@ namespace Ex03.GarageLogic
                 report.AppendLine(tire.CurrentAirPressure.ToString());
                 report.Append("     Maximum Air Pressure: ");
                 report.AppendLine(tire.MaxManufacturerAirPressure.ToString());
-                //TODO: Max Air Pressure <DONE>
             }
 
             report.AppendLine("Vehicle Energy: ");
@@ -66,12 +64,12 @@ namespace Ex03.GarageLogic
             {
                 report.AppendLine("     Energy Type: Electric");
 
-                report.Append("     Max Energy: "); //TODO: Max amount of fuel <DONE>
+                report.Append("     Max Energy: "); 
                 ElectricEngine electricEngine = Vehicle.Engine as ElectricEngine;
                 report.Append(electricEngine.MaxWorkHour.ToString());
                 report.AppendLine(" hours");
 
-                report.Append("     Current Amount: "); //TODO: Current amount of Electricity <DONE>
+                report.Append("     Current Amount: "); 
                 report.Append((Vehicle.Engine as ElectricEngine).WorkHoursRemining);
                 report.AppendLine(" hours");
             }
@@ -81,21 +79,18 @@ namespace Ex03.GarageLogic
                 string fuelType = getVehicleFuelType(Vehicle).Value.ToString();
                 report.AppendLine(fuelType);
 
-                report.Append("     Max Energy: "); //TODO: Max amount of max amount of electricity <DONE>
+                report.Append("     Max Energy: "); 
                 FuelEngine fuelEngine = Vehicle.Engine as FuelEngine;
                 report.Append(fuelEngine.MaxFuelAmount.ToString());
                 report.AppendLine(" liters");
 
-                report.Append("     Current Amount: "); //TODO: Current amount of fuel <DONE>
+                report.Append("     Current Amount: "); 
                 report.Append((Vehicle.Engine as FuelEngine).CurrentFuelAmount);
                 report.AppendLine(" liters");
             }
             report.Append("     Energy Left Precent: ");
-            //TODO: make this precent and not 0.54156385764 <DONE>
             report.AppendLine(Vehicle.GetEnergyLeftPrecent().ToString("P"));
 
-            //TODO: color <DONE>
-            //TODO: num of doors <DONE>
             Car car = Vehicle as Car;
             if (car != null)
             {
@@ -105,8 +100,6 @@ namespace Ex03.GarageLogic
                 report.AppendLine(car.NumOfDoors.ToString());
             }
 
-            //TODO: Motorcycly License type <DONE>
-            //TODO: Motorcycly engine cc <DONE>
             var motorcycle = Vehicle as Motorcycle;
             if (motorcycle != null)
             {
@@ -116,9 +109,6 @@ namespace Ex03.GarageLogic
                 report.AppendLine(motorcycle.EngineCc.ToString());
             }
 
-            //TODO: current cargo weight <DONE>
-            //TODO: max cargo weight <DONE>
-            //TODO: dangerous materials <DONE>
             Truck truck = Vehicle as Truck;
             if (truck != null)
             {

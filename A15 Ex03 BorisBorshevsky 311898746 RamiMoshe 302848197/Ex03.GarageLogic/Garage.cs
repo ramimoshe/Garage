@@ -78,7 +78,7 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Vehicle does not exists");
             }
 
-            // TODO: throw exeption when you try to fuel electric vehicle <DONE>
+            // TODO: throw exeption when you try to fuel electric vehicle <DONE> <Where???>
             FuelEnergy fuelEnergy = new FuelEnergy(i_FuelType, i_AmountCc);
             Tickets[i_LicencePlate].Vehicle.FillEnergy(fuelEnergy);
         }
@@ -90,7 +90,7 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Vehicle does not exists");
             }
 
-            // TODO: throw exeption when you try to charge fuel vehicle <DONE>
+            // TODO: throw exeption when you try to charge fuel vehicle <DONE> <Where???>
             ElectricEnergy electricEnergy = new ElectricEnergy(i_AmountMinutes);
             Tickets[i_LicencePlate].Vehicle.FillEnergy(electricEnergy);
         }
