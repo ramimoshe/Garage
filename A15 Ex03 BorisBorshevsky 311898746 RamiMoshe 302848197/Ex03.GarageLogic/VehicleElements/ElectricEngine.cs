@@ -47,7 +47,7 @@ namespace Ex03.GarageLogic.VehicleElements
         /// <summary>
         /// fill energy to engine
         /// </summary>
-        /// <param name="i_Energy">Energy to add</param>
+        /// <param name="i_EnergyToAdd">Energy to add</param>
         public override void FillEnergy(BaseEnergy i_EnergyToAdd)
         {
             ElectricEnergy electricEnergy = i_EnergyToAdd as ElectricEnergy;

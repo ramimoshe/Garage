@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic.Exceptions
             MaxValue = i_MaxValue;
             MinValue = i_MinValue;
         }
+
         public override string Message
         {
             get
@@ -23,6 +24,5 @@ namespace Ex03.GarageLogic.Exceptions
                 return string.Format("Error! Your choice must be between {0} and {1}", MinValue, MaxValue);
             }
         }
-
     }
 }

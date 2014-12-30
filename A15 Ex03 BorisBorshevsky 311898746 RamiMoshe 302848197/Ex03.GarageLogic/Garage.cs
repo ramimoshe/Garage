@@ -46,7 +46,7 @@ namespace Ex03.GarageLogic
         /// <summary>
         /// 
         /// </summary>
-        /// <return>List of License Plates in the garage</returns>
+        /// <returns>List of License Plates in the garage</returns>
         public List<string> GetLicencePlatesInGarage()
         {
             return GetLicencePlatesInGarage(eVehicleState.Amendment | eVehicleState.Fixed | eVehicleState.Payed);

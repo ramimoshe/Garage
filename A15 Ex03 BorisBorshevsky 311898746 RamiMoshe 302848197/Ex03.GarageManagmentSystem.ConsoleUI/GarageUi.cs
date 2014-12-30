@@ -93,10 +93,8 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                     {
                         break;
                     }
-                    else
-                    {
-                        Console.WriteLine("Invalid input, Please choose number between 1 to {0} only.", i_NumOfOptions);
-                    }
+                    
+                    Console.WriteLine("Invalid input, Please choose number between 1 to {0} only.", i_NumOfOptions);    
                 }
                 catch (FormatException)
                 {
@@ -246,7 +244,6 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                 Console.WriteLine("Operation Failed - bad value entered");
                 Console.WriteLine(voore.Message);
             }
-
         }
 
         private static string getOwnerPhoneFromUser()
