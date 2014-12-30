@@ -675,6 +675,5 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
                 Console.WriteLine("{0}. {1}.", counter, licensePlate);
             }
         }
-
     }
 }
