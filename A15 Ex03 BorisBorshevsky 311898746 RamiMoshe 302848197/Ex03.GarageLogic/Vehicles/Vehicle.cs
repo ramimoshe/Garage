@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic.Vehicles
         {
             foreach (Tire wheel in Tires)
             {
-                wheel.AddAdir(wheel.MaxManufacturerAirPressure);
+                wheel.AddAdir(wheel.MaxManufacturerAirPressure - wheel.CurrentAirPressure);
             }   
         }
     }

@@ -12,25 +12,30 @@ namespace Ex03.GarageLogic.VehicleElements
 
         public string ManufacturerName { get { return r_ManufacturerName; } }
         public float MaxManufacturerAirPressure { get { return r_MaxManufacturerAirPressure; } }
+        /// <summary>
+        /// 
+        /// </summary>
         public float CurrentAirPressure { get; private set; }
-
+        
+        /// <summary>
+        /// Create Tire
+        /// </summary>
+        /// <param name="i_MaxManufacturerAirPressure">Max manufacturer air pressure</param>
+        /// <param name="i_ManufacturerName">Manufacturer name</param>
+        /// <param name="i_CurrentAirPressure">Current air pressure</param>
         public Tire(float i_MaxManufacturerAirPressure, string i_ManufacturerName, float i_CurrentAirPressure)
         {
             r_MaxManufacturerAirPressure = i_MaxManufacturerAirPressure;
             r_ManufacturerName = i_ManufacturerName;
+            CurrentAirPressure = 0f;
 
-            validateAmountOfAir(i_CurrentAirPressure); // TODO: throw exeption if initial air pressure above max <DONE>
-            CurrentAirPressure = i_CurrentAirPressure;
+            AddAdir(i_CurrentAirPressure);
         }
-
+        /// <summary>
+        /// Add air to wheel
+        /// </summary>
+        /// <param name="i_Amount">amount to add</param>
         public void AddAdir(float i_Amount)
-        {
-            validateAmountOfAir(i_Amount); //TODO: use this method instead FillManufacturerAirPressure() <DONE>
-
-            CurrentAirPressure += i_Amount;
-        }
-
-        private void validateAmountOfAir(float i_Amount)
         {
             if (i_Amount < k_MinimalAmountOfAir)
             {
@@ -42,6 +47,8 @@ namespace Ex03.GarageLogic.VehicleElements
                 throw new ValueOutOfRangeException("Cant fill air more then the maximum pressure", k_MinimalAmountOfAir,
                     r_MaxManufacturerAirPressure);
             }
+
+            CurrentAirPressure += i_Amount;
         }
     }
 }

@@ -16,6 +16,12 @@ namespace Ex03.GarageLogic
             r_Tickets = new Dictionary<string, Ticket>();
         }
 
+        /// <summary>
+        /// Create a Ticket for the Garage
+        /// </summary>
+        /// <param name="i_CarOwnerName"></param>
+        /// <param name="i_CarOwnerPhone"></param>
+        /// <param name="i_Vehicle">The vehicle</param>
         public void CreateTicket(string i_CarOwnerName, string i_CarOwnerPhone, Vehicle i_Vehicle)
         {
             if (IsVehicleExists(i_Vehicle.LicencePlate))
@@ -27,16 +33,30 @@ namespace Ex03.GarageLogic
             Tickets.Add(i_Vehicle.LicencePlate, ticket);
         }
 
+        /// <summary>
+        /// Check it a tickit for the vehicle already in the garage
+        /// </summary>
+        /// <param name="i_LicencePlate"></param>
+        /// <returns></returns>
         public bool IsVehicleExists(string i_LicencePlate)
         {
             return Tickets.ContainsKey(i_LicencePlate);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <return>List of License Plates in the garage</returns>
         public List<string> GetLicencePlatesInGarage()
         {
             return GetLicencePlatesInGarage(eVehicleState.Amendment | eVehicleState.Fixed | eVehicleState.Payed);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i_VehicleState">filter by</param>
+        /// <returns>List of License Plated filtered by the eVehicleState</returns>
         public List<string> GetLicencePlatesInGarage(eVehicleState i_VehicleState)
         {
             List<string> serialNumbers = new List<string>();
@@ -50,7 +70,12 @@ namespace Ex03.GarageLogic
 
             return serialNumbers;
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i_LicencePlate"></param>
+        /// <param name="i_VehicleState"></param>
         public void UpdateVehicleState(string i_LicencePlate, eVehicleState i_VehicleState)
         {
             if (!IsVehicleExists(i_LicencePlate))
@@ -61,6 +86,10 @@ namespace Ex03.GarageLogic
             Tickets[i_LicencePlate].VehicleState = i_VehicleState;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i_LicencePlate"></param>
         public void FillManufacturerAirpressure(string i_LicencePlate)
         {
             if (!IsVehicleExists(i_LicencePlate))
@@ -71,6 +100,12 @@ namespace Ex03.GarageLogic
             Tickets[i_LicencePlate].Vehicle.FillManufacturerAirPressure();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i_LicencePlate"></param>
+        /// <param name="i_FuelType"></param>
+        /// <param name="i_AmountCc">amount to add</param>
         public void FuelVehicle(string i_LicencePlate, eFuelType i_FuelType, float i_AmountCc)
         {
             if (!IsVehicleExists(i_LicencePlate))
@@ -78,23 +113,31 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Vehicle does not exists");
             }
 
-            // TODO: throw exeption when you try to fuel electric vehicle <DONE> <Where???>
             FuelEnergy fuelEnergy = new FuelEnergy(i_FuelType, i_AmountCc);
             Tickets[i_LicencePlate].Vehicle.FillEnergy(fuelEnergy);
         }
 
-        public void ChargeVehicle(string i_LicencePlate, float i_AmountMinutes)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i_LicencePlate"></param>
+        /// <param name="i_HoursToAdd"></param>
+        public void ChargeVehicle(string i_LicencePlate, float i_HoursToAdd)
         {
             if (!IsVehicleExists(i_LicencePlate))
             {
                 throw new ArgumentException("Vehicle does not exists");
             }
 
-            // TODO: throw exeption when you try to charge fuel vehicle <DONE> <Where???>
-            ElectricEnergy electricEnergy = new ElectricEnergy(i_AmountMinutes);
+            ElectricEnergy electricEnergy = new ElectricEnergy(i_HoursToAdd);
             Tickets[i_LicencePlate].Vehicle.FillEnergy(electricEnergy);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="i_LicencePlate"></param>
+        /// <returns>String of report</returns>
         public string GetCarReport(string i_LicencePlate)
         {
             if (!IsVehicleExists(i_LicencePlate))

@@ -7,7 +7,6 @@ namespace Ex03.GarageLogic.Vehicles
     {
         private readonly eCarColor r_Color; 
         private readonly eNumOfDoors r_NumOfDoors; 
-        //TODO: Create fuel method!!! (fill energy) <DONE> by Vehicle <Where???>
 
         public Car(string i_ModelName, string i_LicencePlate, List<Tire> i_Tires, eCarColor i_Color, eNumOfDoors i_Doors, Engine i_Engine)
             : base(i_ModelName, i_LicencePlate, i_Tires, i_Engine)

@@ -13,6 +13,8 @@ namespace Ex03.GarageLogic.VehicleElements
         public float WorkHoursRemining { get; private set; }
         public float MaxWorkHour { get { return r_MaxWorkHour; } }
 
+        /// <param name="i_WorkHoursRemining">work hour remining</param>
+        /// <param name="i_MaxWorkHour">max work hour</param>
         public ElectricEngine(float i_WorkHoursRemining, float i_MaxWorkHour)
         {
             if (i_WorkHoursRemining > i_MaxWorkHour)
@@ -24,6 +26,10 @@ namespace Ex03.GarageLogic.VehicleElements
             r_MaxWorkHour = i_MaxWorkHour;
         }
 
+        /// <summary>
+        /// Charge the engine
+        /// </summary>
+        /// <param name="i_Amount">Amount to charge</param>
         public void Charge(float i_Amount)
         {
             if (i_Amount < 0)
@@ -38,10 +44,13 @@ namespace Ex03.GarageLogic.VehicleElements
 
             WorkHoursRemining += i_Amount;
         }
-
-        public override void FillEnergy(BaseEnergy i_Energy)
+        /// <summary>
+        /// fill energy to engine
+        /// </summary>
+        /// <param name="i_Energy">Energy to add</param>
+        public override void FillEnergy(BaseEnergy i_EnergyToAdd)
         {
-            ElectricEnergy electricEnergy = i_Energy as ElectricEnergy;
+            ElectricEnergy electricEnergy = i_EnergyToAdd as ElectricEnergy;
             if (electricEnergy == null)
             {
                 throw new ArgumentException("Invalid type of energy");

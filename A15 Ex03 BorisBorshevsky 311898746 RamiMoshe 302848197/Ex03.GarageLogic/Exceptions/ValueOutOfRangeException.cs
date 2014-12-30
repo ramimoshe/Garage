@@ -2,6 +2,9 @@
 
 namespace Ex03.GarageLogic.Exceptions
 {
+    /// <summary>
+    /// Compatible when the value is out of range
+    /// </summary>
     public class ValueOutOfRangeException : Exception
     {
         public float MaxValue { get; private set; }
@@ -13,5 +16,13 @@ namespace Ex03.GarageLogic.Exceptions
             MaxValue = i_MaxValue;
             MinValue = i_MinValue;
         }
+        public override string Message
+        {
+            get
+            {
+                return string.Format("Error! Your choice must be between {0} and {1}", MinValue, MaxValue);
+            }
+        }
+
     }
 }

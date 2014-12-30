@@ -12,42 +12,9 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 
         private Garage Garage { get; set; }
 
-        /*
-         * -------------------SSSSSSTTTTTUUUUUUBBBBBB
-         * 
-         */
-
-        public void InjectVehicls()
-        {
-
-            Vehicle car1 = VehicleFactory.GenerateFuelCar("Mazda", "F1", eCarColor.Blue, eNumOfDoors.Four, "Mislen", 23.5f, 10.5f);
-            Vehicle car2 = VehicleFactory.GenerateFuelCar("Toyota", "F2", eCarColor.Blue, eNumOfDoors.Five, "Mishlen", 20.5f, 14.5f);
-            Vehicle car3 = VehicleFactory.GenerateFuelCar("Audi", "F3", eCarColor.Green, eNumOfDoors.Two, "Carmel", 25.5f, 17.5f);
-            Vehicle car4 = VehicleFactory.GenerateElectricCar("Audi", "E1", eCarColor.Green, eNumOfDoors.Two, "Carmel", 25.5f, 0.5f);
-            Vehicle car5 = VehicleFactory.GenerateElectricCar("AR", "E2", eCarColor.White, eNumOfDoors.Three, "Mish", 22f, 1.2f);
-            Vehicle car6 = VehicleFactory.GenerateElectricMorotcycle("ElMotor", "E3", eMotorcycleLicenseType.A, 100, "misg", 12f, 1f);
-            Vehicle car7 = VehicleFactory.GenerateFuelMorotcycle("ElMotor", "F4", eMotorcycleLicenseType.A, 100, "misg", 12f, 1f);
-            Vehicle car8 = VehicleFactory.GenerateTruck("hitachi", "T1", 100f, 80f, "mishlen", 20f, 50f, true);
-
-            Garage.CreateTicket("Boris", "050111111", car1);
-            Garage.CreateTicket("David", "050222222", car2);
-            Garage.CreateTicket("Rami", "050333333", car3);
-            Garage.CreateTicket("Eli", "050444444", car4);
-            Garage.CreateTicket("Rafi", "050555555", car5);
-            Garage.CreateTicket("Ofer", "050666666", car6);
-            Garage.CreateTicket("Yossi", "050777777", car7);
-            Garage.CreateTicket("Jager", "050888888", car8);
-        }
-
-        /*
-         * 
-         * 
-         */
-
         public GarageConsoleUi()
         {
             Garage = new Garage();
-            InjectVehicls();
         }
 
         public void Start()
@@ -285,60 +252,70 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private static string getOwnerPhoneFromUser()
         {
             Console.Write("please enter your phone number:  ");
+            
             return Console.ReadLine();
         }
 
         private static string getOwnerNameFromUser()
         {
             Console.Write("please enter your name:  ");
+            
             return Console.ReadLine();
         }
 
         private float getCurrentTireAirPressureFromUser()
         {
             Console.Write("Please enter your vehicle's wheels current air pressure:  ");
+            
             return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
         private static string getTireManufactorerFromUser()
         {
             Console.Write("Please enter your vehicle's wheels Manufactirer:  ");
+           
             return Console.ReadLine();
         }
 
         private static string getVehicleModelFromUser()
         {
             Console.Write("Please enter your vehicle's model:  ");
+           
             return Console.ReadLine();
         }
 
         private float getCurrentEnergyLeftFromUser()
         {
             Console.WriteLine("How many hours left in your Engine's battary?");
+            
             return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
         private float getCurrentFuelAmountFromUser()
         {
             Console.WriteLine("How much fuel do you have? (Liters)");
+            
             return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
         private bool getIsCarryingDangerousMaterialsFromUser()
         {
             Console.WriteLine("Is your truck carring dangerous materials?");
+           
             return getBoolFromUser();
         }
 
         private float getCurrentCargoCargoWeightFromUser()
         {
             Console.WriteLine("What is your current cargo weight?");
+            
             return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
         private float getMaxCargoCargoWeightFromUser()
         {
             Console.WriteLine("What is your Max cargo weight?");
+           
             return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
@@ -397,6 +374,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private int getMotorcycleCcFromUser()
         {
             Console.WriteLine("What is the motorcycle engine size (CC)?");
+           
             return getIntFromUser(v_IsPossitiveNumberOnly);
         }
 
@@ -467,6 +445,7 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
         private void showAllVechaleLicensePlates()
         {
             int counter = 0;
+           
             Console.Clear();
             Console.WriteLine("List of vehicles:");
             Console.WriteLine("-----------------");
@@ -511,32 +490,39 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
 
             Console.WriteLine("You are about to update vehicle state");
             string licensePlate = getLicensePlateFromUser();
-            Console.WriteLine();
-            Console.WriteLine("Please Choose the new state:");
-            Console.WriteLine(" (1) Fix in progress.");
-            Console.WriteLine(" (2) Fixed.");
-            Console.WriteLine(" (3) Payed.");
-            int option = getMenuOptionFromUser(numOfOptions);
-            try
+            if (Garage.IsVehicleExists(licensePlate))
             {
-                switch (option)
+                Console.WriteLine();
+                Console.WriteLine("Please Choose the new state:");
+                Console.WriteLine(" (1) Fix in progress.");
+                Console.WriteLine(" (2) Fixed.");
+                Console.WriteLine(" (3) Payed.");
+                int option = getMenuOptionFromUser(numOfOptions);
+                try
                 {
-                    case 1:
-                        Garage.UpdateVehicleState(licensePlate, eVehicleState.Amendment);
-                        break;
-                    case 2:
-                        Garage.UpdateVehicleState(licensePlate, eVehicleState.Fixed);
-                        break;
-                    case 3:
-                        Garage.UpdateVehicleState(licensePlate, eVehicleState.Payed);
-                        break;
+                    switch (option)
+                    {
+                        case 1:
+                            Garage.UpdateVehicleState(licensePlate, eVehicleState.Amendment);
+                            break;
+                        case 2:
+                            Garage.UpdateVehicleState(licensePlate, eVehicleState.Fixed);
+                            break;
+                        case 3:
+                            Garage.UpdateVehicleState(licensePlate, eVehicleState.Payed);
+                            break;
+                    }
+                    Console.WriteLine("State for vehicle {0} updated", licensePlate);
                 }
-                Console.WriteLine("State for vehicle {0} updated", licensePlate);
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine("Operation failed");
+                    Console.WriteLine(ae.Message);
+                }
             }
-            catch (ArgumentException ae)
+            else
             {
-                Console.WriteLine("Operation failed");
-                Console.WriteLine(ae.Message);
+                Console.WriteLine("Vehicle does not exists");
             }
         }
 
@@ -546,15 +532,22 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             Console.WriteLine("You are about to fill your vehicle tires:");
 
             string licensePlate = getLicensePlateFromUser();
-
-            try
+            if (Garage.IsVehicleExists(licensePlate))
             {
-                Garage.FillManufacturerAirpressure(licensePlate);
+                try
+                {
+                    Garage.FillManufacturerAirpressure(licensePlate);
+                    Console.WriteLine("GREAT SUCCESS!");
+                }
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine("Operation failed");
+                    Console.WriteLine(ae.Message);
+                }
             }
-            catch (ArgumentException ae)
+            else
             {
-                Console.WriteLine("Operation failed");
-                Console.WriteLine(ae.Message);
+                Console.WriteLine("Vehicle does not exists");
             }
 
         }
@@ -578,27 +571,34 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             Console.WriteLine();
             Console.WriteLine("You are about to fuel your vehicle:");
             string licensePlate = getLicensePlateFromUser();
-
-            Console.WriteLine();
-            Console.WriteLine("Please Choose fuel type:");
-            eFuelType fuelType = getFuelTypeFromUser();
-
-            Console.WriteLine("Please enter the amount to fuel:");
-            float amountToFuel = getFloatFromUser(v_IsPossitiveNumberOnly);
-
-            try
+            if (Garage.IsVehicleExists(licensePlate))
             {
-                Garage.FuelVehicle(licensePlate, fuelType, amountToFuel);
+                Console.WriteLine();
+                Console.WriteLine("Please Choose fuel type:");
+                eFuelType fuelType = getFuelTypeFromUser();
+
+                Console.WriteLine("Please enter the amount to fuel:");
+                float amountToFuel = getFloatFromUser(v_IsPossitiveNumberOnly);
+
+                try
+                {
+                    Garage.FuelVehicle(licensePlate, fuelType, amountToFuel);
+                    Console.WriteLine("GREAT SUCCESS!");
+                }
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine("Operation failed");
+                    Console.WriteLine(ae.Message);
+                }
+                catch (ValueOutOfRangeException voore)
+                {
+                    Console.WriteLine("Operation failed");
+                    Console.WriteLine(voore.Message);
+                }
             }
-            catch (ArgumentException ae)
+            else
             {
-                Console.WriteLine("Operation failed");
-                Console.WriteLine(ae.Message);
-            }
-            catch (ValueOutOfRangeException voore)
-            {
-                Console.WriteLine("Operation failed");
-                Console.WriteLine(voore.Message);
+                Console.WriteLine("Vehicle does not exists");
             }
         }
 
@@ -619,18 +619,25 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             Console.WriteLine();
             Console.WriteLine("You are about to charge your vehicle:");
             string licensePlate = getLicensePlateFromUser();
-
-            Console.WriteLine("for how many hours would you like to charge? ");
-            float hoursToCharge = getFloatFromUser(v_IsPossitiveNumberOnly);
-
-            try
+            if (Garage.IsVehicleExists(licensePlate))
             {
-                Garage.ChargeVehicle(licensePlate, hoursToCharge);
+                Console.WriteLine("for how many hours would you like to charge? ");
+                float hoursToCharge = getFloatFromUser(v_IsPossitiveNumberOnly);
+
+                try
+                {
+                    Garage.ChargeVehicle(licensePlate, hoursToCharge);
+                    Console.WriteLine("GREAT SUCCESS!");
+                }
+                catch (ValueOutOfRangeException voore)
+                {
+                    Console.WriteLine("Operation failed");
+                    Console.WriteLine(voore.Message);
+                }
             }
-            catch (ValueOutOfRangeException voore)
+            else
             {
-                Console.WriteLine("Operation failed");
-                Console.WriteLine(voore.Message);
+                Console.WriteLine("Vehicle does not exists");
             }
         }
 
@@ -639,16 +646,23 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             Console.WriteLine();
             Console.WriteLine("You are about to show Cars Report:");
             string licensePlate = getLicensePlateFromUser();
-            try
+            if (Garage.IsVehicleExists(licensePlate))
             {
-                Console.Clear();
-                string carReport = Garage.GetCarReport(licensePlate);
-                Console.WriteLine(carReport);
+                try
+                {
+                    Console.Clear();
+                    string carReport = Garage.GetCarReport(licensePlate);
+                    Console.WriteLine(carReport);
+                }
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine("Operation failed");
+                    Console.WriteLine(ae.Message);
+                }
             }
-            catch (ArgumentException ae)
+            else
             {
-                Console.WriteLine("Operation failed");
-                Console.WriteLine(ae.Message);
+                Console.WriteLine("Vehicle does not exists");
             }
         }
 
