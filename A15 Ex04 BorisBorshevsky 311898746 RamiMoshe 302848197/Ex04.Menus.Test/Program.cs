@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex04.Menus.Test
+﻿namespace Ex04.Menus.Test
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
+            InterfaceMenu.CreateInterfaceMainMenu().Show();
+            DelegatesMenu.CreateDelegatesMenu().Show();
         }
     }
 }
