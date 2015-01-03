@@ -164,9 +164,10 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             }
         }
 
-        private static string getLicensePlateFromUser()
+        private string getLicensePlateFromUser()
         {
             Console.WriteLine("Please enter your car's licence plate");
+            
             return Console.ReadLine();
         }
 
@@ -237,23 +238,21 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             catch (ArgumentException ae)
             {
                 Console.WriteLine("Operation Failed - bad argument");
-                Console.WriteLine(ae.Message);
             }
             catch (ValueOutOfRangeException voore)
             {
                 Console.WriteLine("Operation Failed - bad value entered");
-                Console.WriteLine(voore.Message);
             }
         }
 
-        private static string getOwnerPhoneFromUser()
+        private string getOwnerPhoneFromUser()
         {
             Console.Write("please enter your phone number:  ");
             
             return Console.ReadLine();
         }
 
-        private static string getOwnerNameFromUser()
+        private string getOwnerNameFromUser()
         {
             Console.Write("please enter your name:  ");
             
@@ -267,14 +266,14 @@ namespace Ex03.GarageManagmentSystem.ConsoleUI
             return getFloatFromUser(v_IsPossitiveNumberOnly);
         }
 
-        private static string getTireManufactorerFromUser()
+        private string getTireManufactorerFromUser()
         {
             Console.Write("Please enter your vehicle's wheels Manufactirer:  ");
            
             return Console.ReadLine();
         }
 
-        private static string getVehicleModelFromUser()
+        private string getVehicleModelFromUser()
         {
             Console.Write("Please enter your vehicle's model:  ");
            
