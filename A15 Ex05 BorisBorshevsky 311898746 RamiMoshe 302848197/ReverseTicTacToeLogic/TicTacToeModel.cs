@@ -7,11 +7,11 @@ namespace ReverseTicTacToeLogic
     {
         private readonly ScoreBoard r_scoreBoard;
 
-        public delegate void BoardChaned(Point i_Point, eSymbol i_Symbol);
-        public event BoardChaned OnBoardChaned;
+        //public delegate void BoardChaned(Point i_Point, eSymbol i_Symbol);
+        //public event BoardChaned OnBoardChaned;
 
-        public delegate void GameEnded();
-        public event GameEnded OnGameEnded;
+        //public delegate void GameEnded();
+        //public event GameEnded OnGameEnded;
 
         public Board Board { get; private set; }
 
@@ -37,26 +37,11 @@ namespace ReverseTicTacToeLogic
             if (cellState == eCellState.Empty)
             {
                 Board.SetSymbol(i_Player.Symbol, i_Coordinates);
-                if (OnBoardChaned != null)
-                {
-                    OnBoardChaned(i_Coordinates, i_Player.Symbol);
-                }
             }
 
             if (Board.HasWinner())
             {
                 addScoreToOpponent(i_Player);
-                if (OnGameEnded != null)
-                {
-                    OnGameEnded();
-                }
-            }
-            else if (Board.IsBoardFull())
-            {
-                if (OnGameEnded != null)
-                {
-                    OnGameEnded();
-                }
             }
 
 

@@ -25,8 +25,6 @@ namespace ReverseTicTacToeGui
             InitializeComponent();
             
             r_TicTacToe = new TicTacToeModel(i_Size, i_Player1, i_Player2);
-            r_TicTacToe.OnBoardChaned += TicTacToeOnOnBoardChaned;
-            r_TicTacToe.OnGameEnded += TicTacToe_OnGameEnded;
             r_Player1 = i_Player1;
             r_Player2 = i_Player2;
 
@@ -77,25 +75,6 @@ namespace ReverseTicTacToeGui
             Controls.Add(cellButton);
         }
 
-        void TicTacToe_OnGameEnded()
-        {
-            if (r_TicTacToe.Board.HasWinner())
-            {
-                showNewGameMessage(winnerMessage());
-            }
-            else if (r_TicTacToe.Board.IsBoardFull())
-            {
-                showNewGameMessage(tieMessage());
-            }
-        }
-
-        private void TicTacToeOnOnBoardChaned(Point point, eSymbol symbol)
-        {
-            TicTacToeCellButton button = getButtonByPoint(point);
-            button.SetSymbol(m_CurrentPlayer.Symbol);
-            button.Enabled = false;
-        }
-
         private void CellButton_Click(object i_Sender, EventArgs i_EventArgs)
         {
             TicTacToeCellButton ticTacToeCellButton = i_Sender as TicTacToeCellButton;
@@ -106,18 +85,32 @@ namespace ReverseTicTacToeGui
         {
             if (m_CurrentPlayer.PlayerType == ePlayerType.User)
             {
+                TicTacToeCellButton button = getButtonByPoint(i_TicTacToeCellButton.CellLocation);
+                button.SetSymbol(m_CurrentPlayer.Symbol);
+                button.Enabled = false;
                 r_TicTacToe.TryPlayTurn(i_TicTacToeCellButton.CellLocation, m_CurrentPlayer);
                 if (!r_TicTacToe.Board.IsBoardEmpty())
                     togglePlayerTurn();
             }
 
-            if (m_CurrentPlayer.PlayerType == ePlayerType.Computer && !r_TicTacToe.Board.IsBoardEmpty())
+            if (r_TicTacToe.Board.HasWinner())
             {
-                playPcTurn();
-                togglePlayerTurn();
+                showNewGameMessage(winnerMessage());
+            }
+            else if (r_TicTacToe.Board.IsBoardFull())
+            {
+                showNewGameMessage(tieMessage());
+            }
+            else
+            {
+
+                if (m_CurrentPlayer.PlayerType == ePlayerType.Computer && !r_TicTacToe.Board.IsBoardEmpty())
+                {
+                    playPcTurn();   
+                    togglePlayerTurn();
+                }
             }
         }
-
 
 
         private void playPcTurn()
