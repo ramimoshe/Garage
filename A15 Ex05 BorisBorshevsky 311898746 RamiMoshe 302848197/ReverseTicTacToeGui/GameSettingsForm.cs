@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ReverseTicTacToeLogic;
+using System.Text;
 
 namespace ReverseTicTacToeGui
 {
@@ -28,12 +29,41 @@ namespace ReverseTicTacToeGui
 
         private void ButtonStart_Click(object i_Sender, EventArgs e)
         {
-            Player player1 = new Player(ePlayerType.User, eSymbol.X, tbPlayer1.Text);
-            Player player2 = new Player(getPlayer2Type(), eSymbol.O, tbPlayer2.Text);
-            int size = (int)nUDRows.Value;
+            bool isValidUserInput = validateUserInputs();
+            if (isValidUserInput)
+            {
+                Player player1 = new Player(ePlayerType.User, eSymbol.X, tbPlayer1.Text);
+                Player player2 = new Player(getPlayer2Type(), eSymbol.O, tbPlayer2.Text);
+                int size = (int)nUDRows.Value;
 
-            Hide();
-            new ReverseTicTacToeForm(player1, player2, size).ShowDialog();
+                Hide();
+                new ReverseTicTacToeForm(player1, player2, size).ShowDialog();
+            }
+        }
+
+        private bool validateUserInputs()
+        {
+            bool isValidUserInput = true;
+            StringBuilder errorMessage = new StringBuilder();
+
+            if (tbPlayer1.Text == String.Empty || tbPlayer2.Text == String.Empty)
+            {
+                errorMessage.AppendLine("* Player name cannot be empty");
+                isValidUserInput = false;
+            }
+            
+            if (nUDCols.Value != nUDRows.Value)
+            {
+                errorMessage.Append("* Rows must be equal to Cols");
+                isValidUserInput = false;
+            }
+
+            if (!isValidUserInput)
+            {
+                MessageBox.Show(errorMessage.ToString());
+            }
+
+            return isValidUserInput;
         }
 
         private void nUD_ValueChanged(object i_Sender, EventArgs e)

@@ -1,23 +1,21 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics;
+using System.Drawing;
 using ReverseTicTacToeLogic.Algorithms;
 
 namespace ReverseTicTacToeLogic
 {
     public class TicTacToeModel
     {
-        private readonly ScoreBoard r_scoreBoard;
+        private readonly ScoreBoard r_ScoreBoard;
 
-        //public delegate void BoardChaned(Point i_Point, eSymbol i_Symbol);
-        //public event BoardChaned OnBoardChaned;
-
-        //public delegate void GameEnded();
-        //public event GameEnded OnGameEnded;
+        public delegate void BoardChaned(Point i_Point, eSymbol i_Symbol, eGameState i_GameState);
+        public event BoardChaned OnBoardChaned;
 
         public Board Board { get; private set; }
 
         public TicTacToeModel(int i_Size, Player i_Player1, Player i_Player2)
         {
-            r_scoreBoard = new ScoreBoard(i_Player1, i_Player2);
+            r_ScoreBoard = new ScoreBoard(i_Player1, i_Player2);
             Board = new Board(i_Size);
             Board.InitializeBoard();
         }
@@ -42,27 +40,47 @@ namespace ReverseTicTacToeLogic
             if (Board.HasWinner())
             {
                 addScoreToOpponent(i_Player);
+                if (OnBoardChaned != null)
+                {
+                    OnBoardChaned(i_Coordinates, i_Player.Symbol, eGameState.HasWinner);
+                }
             }
-
+            else
+            {
+                if (Board.IsBoardFull())
+                {
+                    if (OnBoardChaned != null)
+                    {
+                        OnBoardChaned(i_Coordinates, i_Player.Symbol, eGameState.BoardFull);
+                    }
+                }
+                else
+                {
+                    if (OnBoardChaned != null)
+                    {
+                        OnBoardChaned(i_Coordinates, i_Player.Symbol, eGameState.Active);
+                    }
+                }
+            }
 
             return cellState;
         }
 
         private void addScoreToOpponent(Player i_CurrentPlayer)
         {
-            if (r_scoreBoard.GetScores().Player1 == i_CurrentPlayer)
+            if (r_ScoreBoard.GetScores().Player1 == i_CurrentPlayer)
             {
-                r_scoreBoard.AddWinToPlayer2();
+                r_ScoreBoard.AddWinToPlayer2();
             }
             else
             {
-                r_scoreBoard.AddWinToPlayer1();
+                r_ScoreBoard.AddWinToPlayer1();
             }
         }
 
         public ScoreBoard.Scores GetScores()
         {
-            return r_scoreBoard.GetScores();
+            return r_ScoreBoard.GetScores();
         }
 
         public void Surrender(Player i_Player)

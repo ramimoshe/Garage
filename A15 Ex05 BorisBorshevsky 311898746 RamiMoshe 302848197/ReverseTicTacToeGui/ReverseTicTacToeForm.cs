@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using ReverseTicTacToeLogic;
-using ReverseTicTacToeLogic.Algorithms;
 
 namespace ReverseTicTacToeGui
 {
@@ -27,12 +26,37 @@ namespace ReverseTicTacToeGui
             r_TicTacToe = new TicTacToeModel(i_Size, i_Player1, i_Player2);
             r_Player1 = i_Player1;
             r_Player2 = i_Player2;
+            r_TicTacToe.OnBoardChaned += r_TicTacToe_OnBoardChaned;
 
             lblPlayer1Name.Text = i_Player1.PlayerName + ": ";
             lblPlayer2Name.Text = i_Player2.PlayerName + ": ";
             
             buildBoard(i_Size);
             initializeNewGame();
+        }
+
+        void r_TicTacToe_OnBoardChaned(Point i_Point, eSymbol i_Symbol, eGameState i_GameState)
+        {
+            TicTacToeCellButton button = getButtonByPoint(i_Point);
+            button.SetSymbol(i_Symbol);
+            button.Enabled = false;
+
+            switch (i_GameState)
+            {
+                case eGameState.BoardFull:
+                    showNewGameMessage(tieMessage());
+                    break;
+                case eGameState.HasWinner:
+                    showNewGameMessage(winnerMessage());
+                    break;
+                case eGameState.Active:
+                    togglePlayerTurn();
+                    if (m_CurrentPlayer.PlayerType == ePlayerType.Computer)
+                    {
+                        playPcTurn();
+                    }
+                    break;
+            }
         }
 
         private void initializeNewGame()
@@ -44,9 +68,10 @@ namespace ReverseTicTacToeGui
                 ticTacToeCellButton.SetSymbol(eSymbol.Blank);
                 ticTacToeCellButton.Enabled = true;
             }
-
-            lblPlayer1Score.Text = r_Player1.Score.ToString();
-            lblPlayer2Score.Text = r_Player2.Score.ToString();
+            
+            ScoreBoard.Scores scores = r_TicTacToe.GetScores();
+            lblPlayer1Score.Text = scores.Player1.Score.ToString();
+            lblPlayer2Score.Text = scores.Player2.Score.ToString();
         }
 
         private void buildBoard(int i_BoardSize)
@@ -78,69 +103,26 @@ namespace ReverseTicTacToeGui
         private void CellButton_Click(object i_Sender, EventArgs i_EventArgs)
         {
             TicTacToeCellButton ticTacToeCellButton = i_Sender as TicTacToeCellButton;
-            playTurn(ticTacToeCellButton);
-        }
 
-        private void playTurn(TicTacToeCellButton i_TicTacToeCellButton)
-        {
-            if (m_CurrentPlayer.PlayerType == ePlayerType.User)
+            if (ticTacToeCellButton != null && m_CurrentPlayer.PlayerType == ePlayerType.User)
             {
-                TicTacToeCellButton button = getButtonByPoint(i_TicTacToeCellButton.CellLocation);
-                button.SetSymbol(m_CurrentPlayer.Symbol);
-                button.Enabled = false;
-                r_TicTacToe.TryPlayTurn(i_TicTacToeCellButton.CellLocation, m_CurrentPlayer);
-                if (!r_TicTacToe.Board.IsBoardEmpty())
-                    togglePlayerTurn();
-            }
-
-            if (r_TicTacToe.Board.HasWinner())
-            {
-                showNewGameMessage(winnerMessage());
-            }
-            else if (r_TicTacToe.Board.IsBoardFull())
-            {
-                showNewGameMessage(tieMessage());
-            }
-            else
-            {
-
-                if (m_CurrentPlayer.PlayerType == ePlayerType.Computer && !r_TicTacToe.Board.IsBoardEmpty())
-                {
-                    playPcTurn();   
-                    togglePlayerTurn();
-                }
+                r_TicTacToe.TryPlayTurn(ticTacToeCellButton.CellLocation, m_CurrentPlayer);
             }
         }
-
 
         private void playPcTurn()
         {
-            Point pcMove = ArtificialIntelligenceAlgorithm.GetMove(r_TicTacToe.Board, m_CurrentPlayer.Symbol, getNextPlayer().Symbol);
-            getButtonByPoint(pcMove).Enabled = false;
-            getButtonByPoint(pcMove).SetSymbol(m_CurrentPlayer.Symbol);
-            r_TicTacToe.TryPlayTurn(pcMove, m_CurrentPlayer);
+            r_TicTacToe.TryPlayTurn(m_CurrentPlayer);
         }
 
-        private TicTacToeCellButton getButtonByPoint(Point pcMove)
+        private TicTacToeCellButton getButtonByPoint(Point i_Point)
         {
-            return r_CellButtons[convertPointToIndexArray(pcMove)];
+            return r_CellButtons[convertPointToIndexArray(i_Point)];
         }
 
         private int convertPointToIndexArray(Point i_Point)
         {
             return i_Point.X + i_Point.Y*(r_TicTacToe.Board.Size);
-        }
-
-        private void checkGameState()
-        {
-            if (r_TicTacToe.Board.HasWinner())
-            {
-                showNewGameMessage(winnerMessage());
-            }
-            else if (r_TicTacToe.Board.IsBoardFull())
-            {
-                showNewGameMessage(tieMessage());
-            }
         }
 
         private void showNewGameMessage(string i_MessageToUser)
