@@ -66,6 +66,9 @@
     <EmbeddedResource Include="ReverseTicTacToeForm.resx">
       <DependentUpon>ReverseTicTacToeForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TicTacToeCellButton.resx">
+      <DependentUpon>TicTacToeCellButton.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ReverseTicTacToeLogic\ReverseTicTacToeLogic.csproj">
